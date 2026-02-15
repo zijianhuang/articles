@@ -1,0 +1,96 @@
+# WebApiClientGen vs Kiota regarding ASP.NET backend + Angular Frontend
+
+
+## Introduction
+When building modern applications with an **ASP.NET Core backend** and an **Angular frontend**, one recurring challenge is how to **generate strongly typed client APIs**. Developers want to avoid repetitive boilerplate, ensure type safety, and keep backend and frontend models in sync. Two tools often considered are **WebApiClientGen** and **Kiota**. While both aim to simplify client generation, they differ fundamentally in approach and fit.
+
+---
+
+## WebApiClientGen: A Component Set for Native Angular Integration
+[WebApiClientGen](https://github.com/zijianhuang/webapiclientgen/) is a modular toolkit that generates **C# and TypeScript client APIs** directly from ASP.NET Core Web API controllers — without requiring Swagger/OpenAPI.
+
+### Key Features
+- **C# client generation** for .NET, Xamarin.Forms, MAUI, Blazor.  
+- **TypeScript client generation** for Angular, Aurelia, Axios, Fetch API, jQuery.  
+- **POCO → TypeScript conversion** for schema fidelity.  
+- **Angular-native clients** that use Angular’s `HttpClient` and RxJS observables.  
+- **No Swagger/OpenAPI dependency** — leverages runtime type info.  
+
+### Why It Fits Angular Developers
+- Generated Angular services plug directly into Angular’s DI system.  
+- Methods return `Observable<T>`, aligning with Angular’s async patterns.  
+- Eliminates manual HTTP boilerplate.  
+- Ideal for teams following a **Code First** approach in ASP.NET Core.
+
+---
+
+## Kiota: An OpenAPI-Based Generator
+Kiota, developed by Microsoft, generates strongly typed clients from **OpenAPI specifications**. It supports multiple languages, including TypeScript, C#, Java, Python, and Go.
+
+### Key Features
+- **OpenAPI-driven**: requires a Swagger/OpenAPI definition.  
+- **Framework-agnostic TypeScript clients** using Fetch API by default.  
+- **Pluggable request adapters** (Fetch, Node.js).  
+- Broad language support beyond C# and TypeScript.  
+
+### Limitations for Angular Developers
+- No native Angular `HttpClient` integration.  
+- Generated TypeScript clients use Fetch promises, not RxJS observables.  
+- Requires maintaining OpenAPI specs, adding overhead for Code First projects.  
+- Angular integration possible only via custom adapters or wrappers.
+
+---
+
+## Side-by-Side Comparison
+
+| Feature                        | WebApiClientGen                          | Kiota                          |
+|--------------------------------|------------------------------------------|--------------------------------|
+| **Input**                      | ASP.NET Core controllers (runtime types) | OpenAPI/Swagger spec required  |
+| **C# client generation**       | ✅ Yes                                   | ✅ Yes                         |
+| **TypeScript client generation** | ✅ Yes (Angular, Aurelia, Axios, Fetch, jQuery) | ✅ Yes (Fetch API, Node.js)   |
+| **Angular HttpClient support** | ✅ Native, RxJS Observables              | ❌ Not supported (Fetch only)  |
+| **Swagger/OpenAPI dependency** | ❌ None                                  | ✅ Required                    |
+| **POCO → TypeScript conversion** | ✅ Built-in                             | ❌ Not available               |
+| **Best fit**                   | ASP.NET + Angular (Code First)           | Multi-language SDKs (OpenAPI) |
+
+---
+
+## Recommendation for ASP.NET + Angular Developers
+If your stack is **ASP.NET Core backend + Angular frontend**, and you want **native Angular HttpClient integration without Swagger/OpenAPI**, the most appropriate choice is:
+
+**WebApiClientGen Component Set**  
+
+- Use **WebApiClientGenCore** to generate C# clients for backend consumers.  
+- Use the **Angular TypeScript plugin** to generate Angular services with HttpClient + RxJS.  
+- Use **POCO2TS** to keep your TypeScript interfaces aligned with backend models.  
+- Run the provided **test harnesses** to validate serializer fidelity and frontend integration.  
+
+Kiota is powerful if you need **multi-language SDKs** from OpenAPI specs (e.g., distributing APIs to external developers in Java, Python, Go). But for **internal Angular + ASP.NET projects**, WebApiClientGen offers a more direct, developer-friendly pipeline.
+
+---
+
+## Conclusion
+For an application developer building **ASP.NET Core + Angular solutions**, the choice is clear:  
+- **WebApiClientGen** provides a **component set** tailored for Angular, delivering native HttpClient services, RxJS observables, and schema fidelity — all without Swagger/OpenAPI.  
+- **Kiota** shines in broader OpenAPI ecosystems but requires extra work to fit Angular naturally.  
+
+By adopting WebApiClientGen, you streamline your workflow, reduce boilerplate, and ensure type safety across backend and frontend — exactly what modern full-stack teams need.
+
+---
+
+## Using WebApiClientGen in ASP.NET Core + Angular
+
+### 1. Install the NuGet Packages
+On your ASP.NET Core Web API project, add the required packages:
+
+```powershell
+dotnet add package Fonlow.WebApiClientGenCore
+dotnet add package WebApiClientGenCore.NG2
+or
+dotnet add package WebApiClientGenCore.NG2FormGroup
+```
+
+- `WebApiClientGenCore` → generates C# client APIs and host plugins.  
+- `WebApiClientGenCore.NG2FormGroup` → generates TypeScript codes support native HttpClient and FormGroup with validations.
+
+For more details, please check "[Generate Typed FormGroup of Angular Reactive Forms with ASP.NET Core Web API](https://www.codeproject.com/articles/Generate-Typed-FormGroup-of-Angular-Reactive-Forms)"
