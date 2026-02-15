@@ -6,23 +6,26 @@ I have crafted one from scratch based on specific functional requirements and te
 
 ## Requirements
 
-### Functional requirements:
-1. Support light and dark themes.
-2. Support more than 2 themes, therefore at least 3 themes are available.
-3. Support prebuilt themes used by many Web applications, optionally plus an app specific css for colors like `colors.css`, with optional css for dark colors css like `colors-dark.css`.
-4. Support dynamically switching among themes.
-5. When starting the same Web app/site in the other tab, the explicitly selected theme is used.
+Develop an API using TypeScript with helper functions or classes that enable TypeScript developers to construct a theme picker for a website or web application. The implementation may optionally provide friendly integrations for Angular or React.
 
-### Technical requirements:
-1. Reusable across apps.
-2. Minimum API surface for the sake of easy to customize and easy to call.
-3. Neutral to specific UI design.
-4. Must be efficient without causing blinking during startup and switching.
-5. Usable in SPA and PWA.
-6. Usable in PWA, offline usage and Intranet.
-7. Adjustable after build, bundle and deployment. For example, admin can adjust the number and the order of the themes listed, and app specific colors can be adjusted.
-8. Themes may be hosted locally or in CDN.
-9. Selecting a theme which is currently loaded won't cause the theme to be loaded again.
+### Functional Requirements
+1. Support both light and dark themes.  
+2. Support more than two themes — at least three themes must be available.  
+3. Support commonly used prebuilt themes, optionally combined with an app‑specific color stylesheet such as `colors.css`, with an optional dark‑mode variant like `colors-dark.css`.  
+4. Support dynamic switching between themes at runtime.  
+5. When the same web app/site is opened in another browser tab, the explicitly selected theme should be preserved and applied.
+
+### Technical Requirements
+1. Reusable across multiple applications.  
+2. Minimal API surface to ensure easy customization and easy usage.  
+3. Neutral with respect to specific UI design choices.  
+4. Must be efficient and avoid visual flicker during startup and theme switching.  
+5. Usable in both SPA and PWA.  
+6. Fully functional in PWAs, offline usage, and intranet environments.  
+7. Adjustable after build, bundling, and deployment. For example, an admin should be able to change the number and order of available themes, and modify app‑specific color files.  
+8. Themes may be hosted locally or on a CDN.  
+9. Selecting a theme that is already loaded should not trigger a reload of the theme.  
+10. Core theme management must be separated from the theme‑picker UI.
 
 ### Examples in the real world:
 1. [Angular Material Doc](https://material.angular.dev/)
@@ -143,12 +146,21 @@ Code behind ([full codes](https://github.com/zijianhuang/nmce/blob/master/projec
 
 ## Summary
 
-1. Add themeLoader.ts
-2. Add data schema `themeDef.ts` for the themes dictionary in `siteconfig.js`, along with `environment.common.ts` for strongly typed site config during Web app startup.
-3. Call `ThemeLoader.loadTheme()` before the bootstrap of the Web app.
-4. In the UI component presenting the theme picker, convert the themes dictionary to an array which will be used to present the list. And call `ThemeLoader.loadTheme()` when the picker picks a theme.
-5. Prepare `siteconfig.js`.
-6. In index.html, add `<script src="conf/siteconfig.js"></script>` .
+The API exposes 3 contracts:
+1. `static loadTheme(picked: string | null, appColorsDir?: string | null)` of themeLoader to be called during startup, and when the app user picks one from available themes.
+2. `static get selectedTheme(): string | null` of themeLoader.
+3. JavaScript constant SITE_CONFIG that contains a theme dictionary.
+
+### Installation and Integration
+1. Add [themeLoader.ts](https://github.com/zijianhuang/nmce/blob/master/projects/demoapp/src/app/themeLoader.ts)
+2. Add data schema [`themeDef.ts`](https://github.com/zijianhuang/nmce/blob/master/projects/demoapp/src/environments/themeDef.ts) for the themes dictionary in `siteconfig.js`, along with [`environment.common.ts`](https://github.com/zijianhuang/nmce/blob/master/projects/demoapp/src/environments/environment.common.ts) for strongly typed site config during Web app startup.
+3. Call `ThemeLoader.loadTheme()` before the [bootstrap of the Web app](https://github.com/zijianhuang/nmce/blob/master/projects/demoapp/src/main.ts).
+4. In the [UI component presenting the theme picker](https://github.com/zijianhuang/nmce/blob/master/projects/demoapp/src/app/app.component.ts), convert the themes dictionary to an array which will be used to present the list. And call `ThemeLoader.loadTheme()` when the picker picks a theme.
+5. Prepare [`siteconfig.js`](https://github.com/zijianhuang/nmce/blob/master/projects/demoapp/src/conf/siteconfig.js).
+6. In [index.html](https://github.com/zijianhuang/nmce/blob/master/projects/demoapp/src/index.html), add `<script src="conf/siteconfig.js"></script>` .
+
+Remarks:
+* Interfaces defined in `themeDef.ts` and `environment.common.ts` won't be built into JavaScript, therefore they are not part of the API
 
 ### Web Sites and Apps that Use ThemeLoader
 
@@ -162,5 +174,13 @@ After Angular Material Components v12, the documentation site has been merged in
 
 Please check https://github.com/angular/components/blob/main/docs/src/app/shared/theme-picker/ and https://github.com/angular/material.angular.io/blob/main/src/app/shared/style-manager/ . 
 
+The design basically conforms to the "Requirements" above, though more complex and comprehensive in the contexts of the documentation site, and within its business scope. Overall, decent and elegant enough.
+
+And likely, the design and the implementation have inspired many LLMs based AI code generators.
+
 ## Alternative Designs by AI Code Generators
+
+Using the requirements above as prompt, I asked Windows Copilot to generate sourcecode, then  asked M365 Copilot of another account, and the Claude.AI etc.
+
+
 
