@@ -1,12 +1,14 @@
 # Web Theme Loader in TypeScript
 
+When users use my Angular app, they shall be able to select a theme from a theme list, some of which are dark.
+
 If you google `JavaScript theme loader`, you may find many articles and example codes. And Google AI and Copilot and alike may generate fairly decent codes, as many JavaScript programmers have crafted many for over 2 decades.
 
 I have crafted one from scratch based on specific functional requirements and technical requirements, conforming to my design principles for UI, UX and Developer Experience.
 
 ## Requirements
 
-Develop an API using TypeScript with helper functions or classes that enable TypeScript developers to construct a theme picker for a website or web application. The implementation may optionally provide friendly integrations for Angular or React.
+Develop an API using TypeScript with helper functions or classes that enable TypeScript developers to construct a theme picker for a website or web application. The implementation may optionally provide friendly integrations for Angular.
 
 ### Functional Requirements
 1. Support both light and dark themes.  
@@ -43,7 +45,87 @@ Develop an API using TypeScript with helper functions or classes that enable Typ
 themeLoader.ts ([full sourcecode](https://github.com/zijianhuang/nmce/blob/master/projects/demoapp/src/app/themeLoader.ts))
  ```ts
 export class ThemeLoader {
+  private static readonly key = 'app.theme'; //the key for storing selected theme filename. Generally no need to change
+  private static readonly themeLinkId = 'theme';
+  private static readonly appColorsLinkId = 'app-colors';
+  private static readonly colorsCss = 'colors.css';
+  private static readonly colorsDarkCss = 'colors-dark.css'; // if your app use light only or dark only, just make colorsCss and colorsDarkCss the same filename.
 
+  /**
+   * selected theme file name saved in localStorage.
+   */
+  static get selectedTheme(): string | null {
+    return localStorage.getItem(this.key);
+  };
+  private static set selectedTheme(v: string) {
+    localStorage.setItem(this.key, v);
+  };
+
+  /**
+   * 
+   * @param picked one of the prebuilt themes, typically used with the app's theme picker.
+   * or null for the first one in themesDic, typically used before calling `bootstrapApplication()`.
+   * @param appColorsDir if the app is using prebuilt theme only for all color styling, this parameter could be ignore. 
+   * Otherwise, null means that colors.css or colors-dark.css is in the root, 
+   * or a value like 'conf/' is for the directory under root,
+   * or undefined means the app uses theme only for color.
+   */
+  static loadTheme(picked: string | null, appColorsDir?: string | null) {
+    if (!AppConfigConstants.themesDic || Object.keys(AppConfigConstants.themesDic).length === 0) {
+      console.error('Need AppConfigConstants.themesDic with at least 1 item');
+      return;
+    }
+
+    let themeLink = document.getElementById(this.themeLinkId) as HTMLLinkElement;
+    if (themeLink) { // app has been loaded in the browser page/tab.
+      const currentTheme = themeLink.href.substring(themeLink.href.lastIndexOf('/') + 1);
+      const notToLoad = picked == currentTheme;
+      if (notToLoad) {
+        return;
+      }
+
+      const r = AppConfigConstants.themesDic[picked!];
+      if (!r) {
+        return;
+      }
+
+      themeLink.href = picked!;
+      this.selectedTheme = picked!;
+      console.info(`theme altered to ${picked}.`);
+
+      if (appColorsDir === undefined) {
+        return;
+      }
+
+      let appColorsLink = document.getElementById(this.appColorsLinkId) as HTMLLinkElement;
+      if (appColorsLink) {
+        const customFile = r.dark ? this.colorsDarkCss : this.colorsCss;
+        appColorsLink.href = (appColorsDir === null) ? customFile : appColorsDir + customFile;
+      }
+
+    } else { // app loaded for the first time, then create 
+      themeLink = document.createElement('link');
+      themeLink.id = this.themeLinkId;
+      themeLink.rel = 'stylesheet';
+      const firstTheme = picked ?? Object.keys(AppConfigConstants.themesDic!)[0];
+      themeLink.href = firstTheme;
+      document.head.appendChild(themeLink);
+      this.selectedTheme = firstTheme;
+      console.info(`Initially loaded theme ${firstTheme}`);
+
+      if (appColorsDir === undefined) {
+        return;
+      }
+
+      const appColorsLink = document.createElement('link');
+      appColorsLink.id = this.appColorsLinkId;
+      appColorsLink.rel = 'stylesheet';
+      const customFile = AppConfigConstants.themesDic[firstTheme].dark ? this.colorsDarkCss : this.colorsCss;
+      appColorsLink.href = (appColorsDir === null) ? customFile : appColorsDir + customFile;
+      document.head.appendChild(appColorsLink);
+    }
+  }
+}
  ```
 
 ### Configuration
