@@ -1,10 +1,14 @@
 # Use M365 Copilot to Craft Web Theme Loader
 
-I have crafted one from scratch based on specific functional requirements and technical requirements, conforming to my design principles for UI, UX and Developer Experience.
-
 ## Requirements
 
-Develop an API using TypeScript with helper functions or classes that enable TypeScript developers to construct a theme picker for a website or web application. The implementation may provide friendly integrations for Angular PWA.
+### User Story
+
+As a web app user, I want to choose from multiple available themes — sometimes light, other times dark.
+
+### Work Order
+
+Develop a TypeScript-based API that provides helper functions or classes for building a theme picker in web applications. The API should be framework‑agnostic, while optionally offering convenient integration points for Angular applications.
 
 ### Functional Requirements
 1. Support both light and dark themes.  
@@ -752,6 +756,9 @@ If you’d like, tell me:
 I can tailor the code scaffolding to your stack and deliver a small sample repo layout.
 
 # Analysis
+
+I have crafted one from scratch based on the same functional requirements and technical requirements, conforming to my design principles for UI, UX and Developer Experience:
+* [Yet Another Web Theme Loader](../Web%20Theme%20Loader/)
 
 Comparing with my hand-crafted one, this one generated is much more complex, while I haven't tested if the sourcecode can be built successfully and executed properly.
 

@@ -4,7 +4,13 @@ I have crafted one from scratch based on specific functional requirements and te
 
 ## Requirements
 
-Develop an API using TypeScript with helper functions or classes that enable TypeScript developers to construct a theme picker for a website or web application. The implementation may provide friendly integrations for Angular or React.
+### User Story
+
+As a web app user, I want to choose from multiple available themes — sometimes light, other times dark.
+
+### Work Order
+
+Develop a TypeScript-based API that provides helper functions or classes for building a theme picker in web applications. The API should be framework‑agnostic, while optionally offering convenient integration points for Angular and React applications.
 
 ### Functional Requirements
 1. Support both light and dark themes.  
@@ -26,6 +32,8 @@ Develop an API using TypeScript with helper functions or classes that enable Typ
 10. Core theme management must be separated from the theme‑picker UI.
 
 Using the requirements as prompt, I asked Windows Copilot to generate sourcecode, and the following is the result.
+
+---
 
 **Designing TS API**
 
