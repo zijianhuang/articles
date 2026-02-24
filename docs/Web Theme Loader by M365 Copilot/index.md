@@ -760,7 +760,7 @@ I can tailor the code scaffolding to your stack and deliver a small sample repo 
 I have crafted one from scratch based on the same functional requirements and technical requirements, conforming to my design principles for UI, UX and Developer Experience:
 * [Yet Another Web Theme Loader](../Web%20Theme%20Loader/)
 
-Comparing with my hand-crafted one, this one generated is much more complex, while I haven't tested if the sourcecode can be built successfully and executed properly.
+Comparing with my hand-crafted sourcecode, this one generated is much more complex, while I haven't tested if the sourcecode can be built successfully and executed properly.
 
 And comparing with "Use Windows Copilot to Craft Web Theme Loader", the requirements has one more technical requirement:
 1. The config settings must be loaded during app startup before any component is rendered.

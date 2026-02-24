@@ -1,6 +1,6 @@
 # Use Windows Copilot to Craft Web Theme Loader
 
-I have crafted one from scratch based on specific functional requirements and technical requirements, conforming to my design principles for UI, UX and Developer Experience.
+I have crafted a Web theme loader from scratch based on specific functional requirements and technical requirements, conforming to my design principles for UI, UX and Developer Experience.
 
 ## Requirements
 
@@ -577,6 +577,6 @@ I realize that the prompt presented by the requirements does not explicitly stat
 
 As an experienced developer, when writing codes, I have many implicit contexts in my mind, and have muscle memory of writing codes according to contents and contexts explicit and implicit, along with many background knowledge in mind or in subconscious. 
 
-Often only when writing codes, many more prompts could be popping up from my mind. Without writing codes, I would write very little prompts, mostly based on explicit knowledge and visual hints.
+Often only when writing codes, many more prompts could be popping up from my mind. Without writing codes, I can write very little prompts, mostly based on explicit knowledge and visual hints.
 
 Nevertheless, I will add a few more technical requirements when I prompt M365 Copilot to craft code.

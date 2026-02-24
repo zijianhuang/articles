@@ -1,4 +1,4 @@
-# Web Theme Loader in TypeScript
+# Web Theme Loader in TypeScript with Minimum API Surface
 
 When users use my Angular apps, they shall be able to select a theme from a theme list, some of which are dark.
 
