@@ -171,3 +171,40 @@ All these are just my impressions, not so scientific backing up by statistics. H
 
 1. Hopefully AI can write simple and short working codes for non-trivial subjects not through referencing existing codes, but through reasoning. 
 2. AI coding still need some scientific breakthrough to avoid becoming more and more mediotic .
+
+
+# How AI Code Agents are going to help you
+
+The following is my personal opinions without statistics support.
+
+## Senior developers
+
+Definition senior developers:
+1. Over 5 years experience in commercial programming. 
+1. At least degree in software engineering or computing science.
+1. Continuous study through reading textbooks or taking courses.
+
+Without a degree, self-taught is OK, while having a degree is not to obtain knowledge, but also undergo systematic trainings for the ways of thinking and teamwork. Surely some can obtain such skills without a degree.
+
+### Advantages when prompting AI
+
+1. Big pictures of functional requirements and technical requirements.
+1. Understand how AI code agents work.
+1. Capability of dividing pieces of works, suitable for AI to generate usable codes.
+1. Deep understanding of business contexts and technical contexts.
+
+### Shortfalls when prompting AI
+
+1. Through years of study and practices, many good (or bad?) practices have been melted into their blood. They may design simple structures and craft clean code quickly through muscle memory, without often realizing "why and how". This may add some difficulty to crafting prompts. I would realize "why and how" when mentoring fellow developers, and these days, one of the fellow developers could be a AI code agent.
+1. They are typically fond of decent code quality, and likely become picky regarding the quality of AI generated code or app. This may make them look less appealing in front of the business decision makers who often are focused on short term gain, and don't mind long term pain in the R&D areas.
+
+
+## Junior Developers
+
+
+
+Due to the current infrastructure and architecture of AI training, AI can not really understand business contexts and technical contexts as human can.
+
+## Clean Code to help yourself and help AI to help you
+
+Clean code + meaningful doc comment may help AI to help you.
