@@ -249,7 +249,7 @@ If you’d like, tell me:
 And I’ll give you a **high-performance prompt template customized for your workflow.**
 
 ---
-How about giving prompts as natural language with User Story, Workorder, Functional Requirements and Technical Requirements together?
+How about giving prompts as natural language with User Story, Work order, Functional Requirements and Technical Requirements together?
 ---
 
 That’s actually an **excellent and very professional way** to prompt — especially in **ChatGPT**, **Claude**, or **Google AI Studio**.

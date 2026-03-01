@@ -1,4 +1,4 @@
-There are coding agents like Windows Copilot, GitHub Copilot, Google AI Studio and Claude AI, and OpenAI Codex etc. What are the common way or format to give prompts?
+There are coding agents like Windows Copilot, GitHub Copilot, Google AI Studio and Claude AI, and OpenAI Codex etc. What are the common ways or formats to give prompts?
 ----
 ----
 Great question! Although each coding assistant has its own UI and features (Windows Copilot, GitHub Copilot, Google AI Studio, Claude, OpenAI models, etc.), the **best-performing prompts share a common structure and style**.

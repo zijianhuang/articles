@@ -30,7 +30,7 @@ Develop a TypeScript-based API that provides helper functions or classes for bui
 10. Core theme management must be separated from the theme‑picker UI.
 11. The config settings must be loaded during app startup before any component is rendered.
 
-Using the requirements as prompt, I asked M365 Copilot to generate sourcecode, and the following is the result.
+Using the requirements as prompt, I asked Claude.ai to generate sourcecode, and the following is the result.
 
 ---
 
