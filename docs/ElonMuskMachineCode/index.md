@@ -113,11 +113,18 @@ Grok Code likely has its own mechanisms to avoid code bloat, and SOLID and desig
 
 ## One Fundamental Problem of Prompt to AI-generated Binary
 
-This approach effectively eliminates human intervention: review, verification, and validation regarding to product quality.
+This approach effectively eliminates human intervention: review, verification, and validation regarding product quality.
 
 Even if you disassemble machine code into assembly code, the resulting code is extremely difficult for humans to read, even if AI attempts to polish it by adding symbolic names.
 
 The entire binary becomes a black box. At best, it behaves as expected but with more than you have bargained for; at worst, it may contain multiple Pandora’s boxes—unless you fully trust AI-based review, verification, and validation.
+
+### “A problem well stated is a problem half solved.” 
+
+This statement is often attributed to Charles Kettering. In the context of AI generating code, it means that clearly defining a prompt makes it significantly easier for the AI to produce code that aligns with human expectations. However, here are two questions:
+
+1. How often have you stated a complex problem well without multiple iterations?
+2. How confident are you that AI can fully understand your well‑stated problem?
 
 ## Areas Where Grok Code May Shine
 
@@ -136,5 +143,7 @@ For example, as a mathematician, you may use Grok Code to generate the whole Mat
 Given a complex Swagger/OpenAPI definition—such as those used by Medicare Online, can an AI code generator produce usable code in C#, TypeScript, Java, and other languages?
 
 Apparently, ChatGPT and Copilot cannot. Otherwise, Microsoft would have released an online AI‑based code generator to handle this task, instead of delivering Microsoft Kiota.
+
+A Swagger / OpenAPI definition is clearly a well stated problem.
 
 I’ll be interested to see whether, by the end of the year, Grok Code can generate a client library in machine code—based on the Medicare Online OpenAPI definitions—running on Windows 11 and an Intel processor.

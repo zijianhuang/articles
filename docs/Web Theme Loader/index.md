@@ -51,86 +51,90 @@ Develop a TypeScript-based API that provides helper functions or classes for bui
 themeLoader.ts ([full sourcecode](https://github.com/zijianhuang/nmce/blob/master/projects/demoapp/src/app/themeLoader.ts))
  ```ts
 export class ThemeLoader {
-  private static readonly key = 'app.theme'; //the key for storing selected theme filename. Generally no need to change
-  private static readonly themeLinkId = 'theme';
-  private static readonly appColorsLinkId = 'app-colors';
-  private static readonly colorsCss = 'colors.css';
-  private static readonly colorsDarkCss = 'colors-dark.css'; // if your app use light only or dark only, just make colorsCss and colorsDarkCss the same filename.
+	private static readonly settings = AppConfigConstants.themeLoaderSettings;
 
-  /**
-   * selected theme file name saved in localStorage.
-   */
-  static get selectedTheme(): string | null {
-    return localStorage.getItem(this.key);
-  };
-  private static set selectedTheme(v: string) {
-    localStorage.setItem(this.key, v);
-  };
+	/**
+	 * selected theme file name saved in localStorage.
+	 */
+	static get selectedTheme(): string | null {
+		return this.settings ? localStorage.getItem(this.settings.storageKey) : null;
+	};
+	private static set selectedTheme(v: string) {
+		if (this.settings) {
+			localStorage.setItem(this.settings.storageKey, v);
+		}
+	};
 
-  /**
-   * 
-   * @param picked one of the prebuilt themes, typically used with the app's theme picker.
-   * or null for the first one in themesDic, typically used before calling `bootstrapApplication()`.
-   * @param appColorsDir if the app is using prebuilt theme only for all color styling, this parameter could be ignore. 
-   * Otherwise, null means that colors.css or colors-dark.css is in the root, 
-   * or a value like 'conf/' is for the directory under root,
-   * or undefined means the app uses theme only for color.
-   */
-  static loadTheme(picked: string | null, appColorsDir?: string | null) {
-    if (!AppConfigConstants.themesDic || Object.keys(AppConfigConstants.themesDic).length === 0) {
-      console.error('Need AppConfigConstants.themesDic with at least 1 item');
-      return;
-    }
+	/**
+	 * Load theme during app startup or operation.
+	 * @param picked one of the prebuilt themes, typically used with the app's theme picker.
+	 * or null for the first one in themesDic, typically used before calling `bootstrapApplication()`.
+	 */
+	static loadTheme(picked: string | null) {
+		if (!AppConfigConstants.themesDic || !this.settings || Object.keys(AppConfigConstants.themesDic).length === 0) {
+			console.error('AppConfigConstants need to have themesDic with at least 1 item, and themeKeys.');
+			return;
+		}
 
-    let themeLink = document.getElementById(this.themeLinkId) as HTMLLinkElement;
-    if (themeLink) { // app has been loaded in the browser page/tab.
-      const currentTheme = themeLink.href.substring(themeLink.href.lastIndexOf('/') + 1);
-      const notToLoad = picked == currentTheme;
-      if (notToLoad) {
-        return;
-      }
+		let themeLink = document.getElementById(this.settings.themeLinkId) as HTMLLinkElement;
+		if (themeLink) { // app has been loaded in the browser page/tab.
+			const currentTheme = themeLink.href.substring(themeLink.href.lastIndexOf('/') + 1);
+			const notToLoad = picked == currentTheme;
+			if (notToLoad) {
+				return;
+			}
 
-      const r = AppConfigConstants.themesDic[picked!];
-      if (!r) {
-        return;
-      }
+			const themeValue = AppConfigConstants.themesDic[picked!];
+			if (!themeValue) {
+				return;
+			}
 
-      themeLink.href = picked!;
-      this.selectedTheme = picked!;
-      console.info(`theme altered to ${picked}.`);
+			themeLink.href = picked!;
+			this.selectedTheme = picked!;
+			console.info(`theme altered to ${picked}.`);
 
-      if (appColorsDir === undefined) {
-        return;
-      }
+			if (this.settings.appColorsLinkId) {
+				let appColorsLink = document.getElementById(this.settings.appColorsLinkId) as HTMLLinkElement;
+				if (appColorsLink) {
+					if (themeValue.dark != null && this.settings.colorsDarkCss && this.settings.colorsCss) {
+						const customFile = themeValue.dark ? this.settings.colorsDarkCss : this.settings.colorsCss;
+						appColorsLink.href = (this.settings.appColorsDir ?? '') + customFile;
+					} else if (this.settings.colorsCss) {
+						appColorsLink.href = (this.settings.appColorsDir ?? '') + this.settings.colorsCss;
+					}
+				}
+			}
+		} else { // when app is loaded for the first time, then create 
+			themeLink = document.createElement('link');
+			themeLink.id = this.settings.themeLinkId;
+			themeLink.rel = 'stylesheet';
+			const themeDicKey = picked ?? Object.keys(AppConfigConstants.themesDic!)[0];
+			themeLink.href = themeDicKey;
+			document.head.appendChild(themeLink);
+			this.selectedTheme = themeDicKey;
+			console.info(`Initially loaded theme ${themeDicKey}`);
 
-      let appColorsLink = document.getElementById(this.appColorsLinkId) as HTMLLinkElement;
-      if (appColorsLink) {
-        const customFile = r.dark ? this.colorsDarkCss : this.colorsCss;
-        appColorsLink.href = (appColorsDir === null) ? customFile : appColorsDir + customFile;
-      }
+			if (this.settings.appColorsLinkId) {
+				const appColorsLink = document.createElement('link');
+				appColorsLink.id = this.settings.appColorsLinkId;
+				appColorsLink.rel = 'stylesheet';
+				const themeValue = AppConfigConstants.themesDic[themeDicKey];
+				if (themeValue.dark != null && this.settings.colorsDarkCss && this.settings.colorsCss) {
+					const customFile = themeValue.dark ? this.settings.colorsDarkCss : this.settings.colorsCss;
+					appColorsLink.href = (this.settings.appColorsDir ?? '') + customFile;
+				} else if (this.settings.colorsCss) {
+					appColorsLink.href = (this.settings.appColorsDir ?? '') + this.settings.colorsCss;
+				}
 
-    } else { // app loaded for the first time, then create 
-      themeLink = document.createElement('link');
-      themeLink.id = this.themeLinkId;
-      themeLink.rel = 'stylesheet';
-      const firstTheme = picked ?? Object.keys(AppConfigConstants.themesDic!)[0];
-      themeLink.href = firstTheme;
-      document.head.appendChild(themeLink);
-      this.selectedTheme = firstTheme;
-      console.info(`Initially loaded theme ${firstTheme}`);
-
-      if (appColorsDir === undefined) {
-        return;
-      }
-
-      const appColorsLink = document.createElement('link');
-      appColorsLink.id = this.appColorsLinkId;
-      appColorsLink.rel = 'stylesheet';
-      const customFile = AppConfigConstants.themesDic[firstTheme].dark ? this.colorsDarkCss : this.colorsCss;
-      appColorsLink.href = (appColorsDir === null) ? customFile : appColorsDir + customFile;
-      document.head.appendChild(appColorsLink);
-    }
-  }
+				if (appColorsLink.href) {
+					document.head.appendChild(appColorsLink);
+					console.info(`appColors ${appColorsLink} loaded.`)
+				} else {
+					console.warn(`With appColorsLinkId defined, dark&colorsCss&colorDarkCss or colorsCss should be defined.`)
+				}
+			}
+		}
+	}
 }
  ```
 
@@ -140,20 +144,51 @@ Typically an Web app with JavaScript has some settings that should be loaded at 
 
 Data schema ([full sourcecode](https://github.com/zijianhuang/nmce/blob/master/projects/demoapp/src/environments/themeDef.ts)):
 ```ts
-export interface ThemeDef {
-	/** Relative path or URL to CDN */
-	filePath: string;
+export interface ThemeValue {
 	/** Display name */
-	display?: string;
-	/** Dark them or not */
+	display: string;
+
+	/** Dark them or not. Optionally to tell which optional app level colors CSS to use, if some app level colors need to adapt the light or dark theme. */
 	dark?: boolean;
 }
 
+export interface ThemeDef extends ThemeValue {
+	/** Relative path or URL to CDN */
+	filePath: string;
+}
+
 export interface ThemesDic {
-	[filePath: string]: {
-		display?: string,
-		dark?: boolean
-	}
+	[filePath: string]: ThemeValue
+}
+
+export interface ThemeLoaderMeta {
+	storageKey: string;
+	themeLinkId: string;
+
+	/** 
+	 * Optionally the app may has an app level colors CSS declaring colors neutral to the light or dark theme, in addition to a prebuilt theme
+	 * If some colors need to adapt the light or dark theme, having those colors defined in colorsCss and colorsDarkCss is convenient for SDLC, since you can
+	 * use tools to flip colors to dark or light.
+	 */
+	appColorsLinkId?: string;
+
+	/**
+	 * If undefined or null, app colors css is in root.
+	 * Effected only when appColorsLinkId is defined.
+	 */
+	appColorsDir?: string;
+
+	/** 
+	 * Optionally the app may has an app level colors CSS declaring colors adapting to the light theme. 
+	 * If the app uses only light or dark theme, for example ThemeValue.dark is not defined, this alone is enough, not needing colorsDarkCss. 
+	*/
+	colorsCss?: string;
+
+	/** 
+	 * Optionally the app may has an app level colors CSS declaring colors adapting to the dark theme. 
+	 * If the app uses only light or dark theme, there's no need to declare this. 
+	 */
+	colorsDarkCss?: string;
 }
 ```
 
@@ -161,10 +196,18 @@ siteconfig.js:
 ```js
 const SITE_CONFIG = {
 	themesDic: {
-		"assets/themes/rose-red.css":{name: "Roes & Red", dark:false},
-		"assets/themes/azure-blue.css":{name: "Azure & Blue", dark:false},
-		"assets/themes/magenta-violet.css":{name: "Magenta & Violet", dark:true},
-		"assets/themes/cyan-orange.css":{name: "Cyan & Orange", dark:true}
+		"assets/themes/rose-red.css":{display: "Roes & Red", dark:false},
+		"assets/themes/azure-blue.css":{display: "Azure & Blue", dark:false},
+		"assets/themes/magenta-violet.css":{display: "Magenta & Violet", dark:true},
+		"assets/themes/cyan-orange.css":{display: "Cyan & Orange", dark:true}
+	},
+	themeLoaderSettings: {
+		storageKey: 'app.theme',
+		themeLinkId: 'theme',
+		appColorsDir: 'conf/',
+		appColorsLinkId: 'app-colors',
+		colorsCss: 'colors.css',
+		colorsDarkCss: 'colors-dark.css'
 	}
 }
 ```
@@ -185,7 +228,7 @@ index.html ([full sourcecode](https://github.com/zijianhuang/nmce/blob/master/pr
 
  main.ts
  ```ts
-ThemeLoader.loadTheme(ThemeLoader.selectedTheme, 'conf/');
+ThemeLoader.loadTheme(ThemeLoader.selectedTheme);
 bootstrapApplication(AppComponent, appConfig); 
 ```
 
@@ -213,9 +256,7 @@ Code behind ([full codes](https://github.com/zijianhuang/nmce/blob/master/projec
 ```ts
   themes?: ThemeDef[];
 
-	get currentTheme() {
-		return ThemeLoader.selectedTheme;
-	}
+  currentTheme: string | null;
   ...
     this.themes = AppConfigConstants.themesDic ? Object.keys(AppConfigConstants.themesDic).map(k => {
       const c = AppConfigConstants.themesDic![k];
@@ -228,7 +269,7 @@ Code behind ([full codes](https://github.com/zijianhuang/nmce/blob/master/projec
     }) : undefined;
 ...
   themeSelectionChang(e: MatSelectChange) {
-    ThemeLoader.loadTheme(e.value, 'conf/');
+    ThemeLoader.loadTheme(e.value);
   }
 ```
 
