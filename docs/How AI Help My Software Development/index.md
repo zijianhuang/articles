@@ -160,7 +160,7 @@ With systematic thinking and critical thinking, you can maximize the usefulness 
 
 Even before AI coding has become a thing, as a full-stack developer, when leading, I spend around 1/3 and 1/4 of billable hours in coding including testing, and spend the rest in studying, thinking and talking to peers and business stakeholders. Typically the size of codebase is around 1/5 to 1/3 of those written by diligent programmers, for the same functional requirements and technical stack. Think about maintenance cost and runtime performance. 
 
-Now I have AI as diligent programmers, I have been thinking how to make best use of them, get the benefits, and avoid overcomplexity and bloating codebase.
+Now I have AI as diligent programmers, I have been thinking how to make best use of them, get the benefits, and avoid over complexity and bloating codebase.
 
 
 Human programmers have desire of making things short and simple, for the sake of maintenance and runtime performance, AI code generators don't care, since they can write large amount of probably working codes quickly.
@@ -170,7 +170,12 @@ All these are just my impressions, not so scientific backing up by statistics. H
 
 
 1. Hopefully AI can write simple and short working codes for non-trivial subjects not through referencing existing codes, but through reasoning. 
-2. AI coding still need some scientific breakthrough to avoid becoming more and more mediotic .
+2. AI coding still need some scientific breakthrough to avoid becoming more and more mediocre.
+
+How much AI can improve overall productivity?
+1. Since I have been spending around 1/4 of billable hours in coding including testing in the era without LLMs AI, therefore, much of the improvement impact on that portion.
+2. LLMs AI as knowledge fast food definitely help my studying, especially in those area not needing in-depth study, for example, some areas where I have been through, but just don't remember some technical details.
+3. However, I need to spend more time in writing prompt, with or without some prompt templates. Since I have grown a lot good or bad habits, therefore when writing prompts, those implicit functional and technical requirements may not so obviously come up from my mind when writing prompt.
 
 
 # How AI Code Agents are going to help you
@@ -208,3 +213,24 @@ Due to the current infrastructure and architecture of AI training, AI can not re
 ## Clean Code to help yourself and help AI to help you
 
 Clean code + meaningful doc comment may help AI to help you.
+
+
+Scrum: Doing Twice the Work at Half the Time.
+Reality: Doing twice the waste at half the time. Not too bad, since many so called works are essentially waste.
+Better: Delivering twice the Value through half the work.
+
+How to determine value, and some works are not waste?
+
+Through proper conversations and in-depth study. 
+
+How to identify waste and technical debts?
+
+"Ask you senior developers" said Patrik Varga.
+
+Indeed. Why?
+because senior developers are the first who suffer, the next is the customers/users, then the business.
+In my observation, over 95% of technical debt is the result of mismanagement at multiple levels, and this is matching what documented in various software engineering textbooks like "Facts and Fallacies of Software Engineering", rather than the capability of software developers.
+This is one of the reasons I often say, technical debt is essentially management debt.
+Why single out senior developers? because many junior developers may enjoy resolving technical debt and creating technical debt. So they may be blind no matter what method you would use. Therefore,
+1. Minimize debt in the first place through adjusting management and culture.
+2. Ask senior developers regularly to identify emerging technical debts.

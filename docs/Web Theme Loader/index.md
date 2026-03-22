@@ -50,6 +50,14 @@ Develop a TypeScript-based API that provides helper functions or classes for bui
 
 themeLoader.ts ([full sourcecode](https://github.com/zijianhuang/nmce/blob/master/projects/demoapp/src/app/themeLoader.ts))
  ```ts
+import { AppConfigConstants } from "../environments/environment.common"; //just for typed
+
+/**
+ * Helper class to load default theme or selected theme among themes defined in app startup settings.
+ * index.html should not have the theme css link during design time.
+ * In addition to the main theme which could be one the prebuilt themes reusable across apps, like one of those of Angular Material, 
+ * the app may optionally has its own app css file for colors.
+ */
 export class ThemeLoader {
 	private static readonly settings = AppConfigConstants.themeLoaderSettings;
 
@@ -66,9 +74,15 @@ export class ThemeLoader {
 	};
 
 	/**
-	 * Load theme during app startup or operation.
+	 * Load default or previously selected theme during app startup, typically used before calling `bootstrapApplication()`.
+	 */
+	static init(){
+		this.loadTheme(this.selectedTheme);
+	}
+
+	/**
+	 * Load theme during operation through `ThemeLoader.loadTheme(themeDicKey);`.
 	 * @param picked one of the prebuilt themes, typically used with the app's theme picker.
-	 * or null for the first one in themesDic, typically used before calling `bootstrapApplication()`.
 	 */
 	static loadTheme(picked: string | null) {
 		if (!AppConfigConstants.themesDic || !this.settings || Object.keys(AppConfigConstants.themesDic).length === 0) {
@@ -161,7 +175,7 @@ export interface ThemesDic {
 	[filePath: string]: ThemeValue
 }
 
-export interface ThemeLoaderMeta {
+export interface ThemeLoaderSettings {
 	storageKey: string;
 	themeLinkId: string;
 
@@ -276,9 +290,10 @@ Code behind ([full codes](https://github.com/zijianhuang/nmce/blob/master/projec
 ## Summary
 
 The API exposes 3 contracts:
-1. `static loadTheme(picked: string | null, appColorsDir?: string | null)` of themeLoader to be called during startup, and when the app user picks one from available themes.
-2. `static get selectedTheme(): string | null` of themeLoader.
-3. JavaScript constant SITE_CONFIG that contains a theme dictionary.
+1. `static init()` of themeLoader to be called during app startup.
+2. `static loadTheme(picked: string | null, appColorsDir?: string | null)` to be called when the app user picks one from available themes.
+3. `static get selectedTheme(): string | null` of themeLoader to give the URL of the selected theme, so GUI may display which theme is in-use.
+4. JavaScript constant SITE_CONFIG that contains a theme dictionary and app specific theme settings.
 
 ### Installation and Integration
 1. Add [themeLoader.ts](https://github.com/zijianhuang/nmce/blob/master/projects/demoapp/src/app/themeLoader.ts)

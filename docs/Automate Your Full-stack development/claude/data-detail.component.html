@@ -1,0 +1,233 @@
+<mat-card class="data-detail-card">
+  <mat-card-header>
+    <mat-card-title>Mixed Data Entry</mat-card-title>
+    <mat-card-subtitle>Fill in the fields below. Hints appear when a field is focused.</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+
+      <!-- ───────────── String fields ───────────── -->
+      <h3 class="section-heading">Identity</h3>
+
+      <!-- name -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Name</mat-label>
+        <input matInput
+               formControlName="name"
+               placeholder="Full name"
+               (focus)="onFocus('name')"
+               (blur)="onBlur()" />
+        @if (focusedField === 'name') {
+          <mat-hint>Required · 2–255 characters</mat-hint>
+        }
+        @if (form.get('name')?.hasError('required')) {
+          <mat-error>Name is required.</mat-error>
+        }
+        @if (form.get('name')?.hasError('minlength')) {
+          <mat-error>At least 2 characters required.</mat-error>
+        }
+        @if (form.get('name')?.hasError('maxlength')) {
+          <mat-error>Maximum 255 characters allowed.</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- emailAddress -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Email Address</mat-label>
+        <input matInput
+               type="email"
+               formControlName="emailAddress"
+               placeholder="user@example.com"
+               (focus)="onFocus('emailAddress')"
+               (blur)="onBlur()" />
+        @if (focusedField === 'emailAddress') {
+          <mat-hint>Optional · Must be a valid email · Max 255 characters</mat-hint>
+        }
+        @if (form.get('emailAddress')?.hasError('email')) {
+          <mat-error>Enter a valid email address.</mat-error>
+        }
+        @if (form.get('emailAddress')?.hasError('maxlength')) {
+          <mat-error>Maximum 255 characters allowed.</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- web -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Website URL</mat-label>
+        <input matInput
+               type="url"
+               formControlName="web"
+               placeholder="https://example.com"
+               (focus)="onFocus('web')"
+               (blur)="onBlur()" />
+        @if (focusedField === 'web') {
+          <mat-hint>Optional · Must be a valid URL (e.g. https://example.com)</mat-hint>
+        }
+        @if (form.get('web')?.hasError('pattern')) {
+          <mat-error>Enter a valid URL.</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- dob -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Date of Birth</mat-label>
+        <input matInput
+               [matDatepicker]="dobPicker"
+               formControlName="dob"
+               placeholder="YYYY-MM-DD"
+               (focus)="onFocus('dob')"
+               (blur)="onBlur()" />
+        <mat-datepicker-toggle matSuffix [for]="dobPicker"></mat-datepicker-toggle>
+        <mat-datepicker #dobPicker></mat-datepicker>
+        @if (focusedField === 'dob') {
+          <mat-hint>Optional · Date only (no time component)</mat-hint>
+        }
+      </mat-form-field>
+
+      <!-- ───────────── Integral fields ───────────── -->
+      <h3 class="section-heading">Numeric Values</h3>
+
+      <!-- itemCount -->
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Item Count</mat-label>
+        <input matInput
+               type="number"
+               formControlName="itemCount"
+               (focus)="onFocus('itemCount')"
+               (blur)="onBlur()" />
+        @if (focusedField === 'itemCount') {
+          <mat-hint>Optional · Integer between −1,000 and 1,000,000</mat-hint>
+        }
+        @if (form.get('itemCount')?.hasError('min')) {
+          <mat-error>Minimum value is −1,000.</mat-error>
+        }
+        @if (form.get('itemCount')?.hasError('max')) {
+          <mat-error>Maximum value is 1,000,000.</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- byte -->
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Byte</mat-label>
+        <input matInput
+               type="number"
+               formControlName="byte"
+               (focus)="onFocus('byte')"
+               (blur)="onBlur()" />
+        @if (focusedField === 'byte') {
+          <mat-hint>Optional · Unsigned 8-bit integer: 0 – 255</mat-hint>
+        }
+        @if (form.get('byte')?.hasError('min')) {
+          <mat-error>Minimum value is 0.</mat-error>
+        }
+        @if (form.get('byte')?.hasError('max')) {
+          <mat-error>Maximum value is 255.</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- sByte -->
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Signed Byte</mat-label>
+        <input matInput
+               type="number"
+               formControlName="sByte"
+               (focus)="onFocus('sByte')"
+               (blur)="onBlur()" />
+        @if (focusedField === 'sByte') {
+          <mat-hint>Optional · Signed 8-bit integer: −128 – 127</mat-hint>
+        }
+        @if (form.get('sByte')?.hasError('min')) {
+          <mat-error>Minimum value is −128.</mat-error>
+        }
+        @if (form.get('sByte')?.hasError('max')) {
+          <mat-error>Maximum value is 127.</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- short -->
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Short</mat-label>
+        <input matInput
+               type="number"
+               formControlName="short"
+               (focus)="onFocus('short')"
+               (blur)="onBlur()" />
+        @if (focusedField === 'short') {
+          <mat-hint>Optional · 16-bit integer: −32,768 – 32,767</mat-hint>
+        }
+        @if (form.get('short')?.hasError('min')) {
+          <mat-error>Minimum value is −32,768.</mat-error>
+        }
+        @if (form.get('short')?.hasError('max')) {
+          <mat-error>Maximum value is 32,767.</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- uShort -->
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Unsigned Short</mat-label>
+        <input matInput
+               type="number"
+               formControlName="uShort"
+               (focus)="onFocus('uShort')"
+               (blur)="onBlur()" />
+        @if (focusedField === 'uShort') {
+          <mat-hint>Optional · Unsigned 16-bit integer: 0 – 65,535</mat-hint>
+        }
+        @if (form.get('uShort')?.hasError('min')) {
+          <mat-error>Minimum value is 0.</mat-error>
+        }
+        @if (form.get('uShort')?.hasError('max')) {
+          <mat-error>Maximum value is 65,535.</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- int -->
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Int (32-bit)</mat-label>
+        <input matInput
+               type="number"
+               formControlName="int"
+               (focus)="onFocus('int')"
+               (blur)="onBlur()" />
+        @if (focusedField === 'int') {
+          <mat-hint>Optional · 32-bit integer: −2,147,483,648 – 2,147,483,647</mat-hint>
+        }
+        @if (form.get('int')?.hasError('min')) {
+          <mat-error>Minimum value is −2,147,483,648.</mat-error>
+        }
+        @if (form.get('int')?.hasError('max')) {
+          <mat-error>Maximum value is 2,147,483,647.</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- uInt -->
+      <mat-form-field appearance="outline" class="half-width">
+        <mat-label>Unsigned Int (32-bit)</mat-label>
+        <input matInput
+               type="number"
+               formControlName="uInt"
+               (focus)="onFocus('uInt')"
+               (blur)="onBlur()" />
+        @if (focusedField === 'uInt') {
+          <mat-hint>Optional · Unsigned 32-bit integer: 0 – 4,294,967,295</mat-hint>
+        }
+        @if (form.get('uInt')?.hasError('min')) {
+          <mat-error>Minimum value is 0.</mat-error>
+        }
+        @if (form.get('uInt')?.hasError('max')) {
+          <mat-error>Maximum value is 4,294,967,295.</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- ───────────── Actions ───────────── -->
+      <div class="form-actions">
+        <button mat-stroked-button type="button" (click)="onReset()">Reset</button>
+        <button mat-raised-button color="primary" type="submit"
+                [disabled]="form.invalid">Save</button>
+      </div>
+
+    </form>
+  </mat-card-content>
+</mat-card>
