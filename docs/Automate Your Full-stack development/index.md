@@ -2,11 +2,11 @@
 
 ## User Story
 
-As a full stack software developer, after developing ASP.NET Web API with data validations in the Web API bindings, I would like the SPA on Angular framework to have client side validations to reduce round trips related data error and improvement user experience.
+As a full stack software developer, after developing ASP.NET Web API with data validations in the Web API bindings, I would like the SPA on Angular framework to have client side validations to reduce round trips of related data error and improve user experience.
 
 ## Functional requirements.
 
-1. When user input invalidate data, the GUI should respond with warning or error message.
+1. When user input invalid data, the GUI should respond with warning or error message.
 2. Invalid data cannot be submitted to the backend.
 
 ## Technical requirements
@@ -15,53 +15,42 @@ As a full stack software developer, after developing ASP.NET Web API with data v
 2. Use built-in validators along with FormControl.
 3. Develop custom validators if necessarily.
 4. Look for 3rd party solutions including AI code agent before hand-crafting codes. For example, the 3rd party code generator or AI should transform some validation attributes of .NET to validators of Angular.
+5. For numeric .NET types like byte, integer, uint, and int64 etc., the client side validations should be applied.
 
 ## Backend with .NET Integral Types and Validation Attributes
 
 POCO Class and API function:
 ```cs
-	[DataContract(Namespace = Constants.DataNamespace)]
 	public class IntegralEntity
 	{
-		[DataMember]
 		public sbyte SByte { get; set; }
 
-		[DataMember]
 		public byte Byte { get; set; }
 
-		[DataMember]
 		public short Short { get; set; }
 
-		[DataMember]
 		public ushort UShort { get; set; }
 
-		[DataMember]
 		public int Int { get; set; }
 
-		[DataMember]
 		public uint UInt { get; set; }
 
 		[Range(-1000, 1000000)]
-		[DataMember]
 		public int ItemCount { get; set; }
 	}
 
-	[DataContract(Namespace = Constants.DataNamespace)]
 	public class MixedDataEntity : IntegralEntity
 	{
-		[DataMember]
 		public DateOnly DOB { get; set; }
 
-		[DataMember(IsRequired = true)]//MVC and Web API does not care
 		[System.ComponentModel.DataAnnotations.Required]//MVC and Web API care about only this
 		[MinLength(2), MaxLength(255)]
 		public string Name { get; set; }
 
-		[DataMember]
 		[RegularExpression(@"^(https?:\/\/)?[da-z.-]+.[a-z.]{2,6}([/\w .-]*)*\/?$")]
 		public Uri Web { get; set; }
 
-		[DataMember, EmailAddress, MaxLength(255)]
+		[EmailAddress, MaxLength(255)]
 		public string EmailAddress { get; set; }
 	}
 
@@ -71,6 +60,7 @@ POCO Class and API function:
 			return entity;
 		}
 ```
+
 
 ## Generate TypeScript Code for Angular Reactive Forms
 
@@ -166,13 +156,13 @@ Generated TypeScript code:
 
 ## Create Data Edit Form Through ChatGPT
 
-It is the normal ChatGPT, not Plus, not Codex, and I gave the following prompt:
+It is the normal ChatGPT, while you are welcome to try Plus, Codex, or Claude AI etc. And I gave the following prompt:
 
 ### Prompt
 
-For Angular Reactive Forms programming of Angular 21 along with Angular Material Components, I have already the following TypeScript codes about the data models and FormGroup declarations:
+For Angular Reactive Forms programming of Angular 21 along with Angular Material Components, I have the following TypeScript codes about the data models and FormGroup declarations:
 ```
-The ts code block above except the generated client API POST call.
+...The ts code block above except the generated client API POST call...
 ...
 ```
 and I would like you to:
@@ -185,8 +175,8 @@ and I would like you to:
 
 ### Generated Component
 
-1. [data-detail.component.ts](https://github.com/zijianhuang/webapiclientgen/blob/master/HeroesDemo/src/app/data-detail/data-detail.component.ts)
-2. [data-detail.component.html](https://github.com/zijianhuang/webapiclientgen/blob/master/HeroesDemo/src/app/data-detail/data-detail.component.html)
+1. [data-detail.component.ts](https://github.com/zijianhuang/DemoCoreWeb/tree/master/AngularHeroes/src/app/data-detail/data-detail.component.ts)
+2. [data-detail.component.html](https://github.com/zijianhuang/DemoCoreWeb/tree/master/AngularHeroes/src/app/data-detail/data-detail.component.html)
 
 With minor modification, I get the following:
 
@@ -194,12 +184,14 @@ With minor modification, I get the following:
 
 # Compare with Other AI Code Agents
 
+Please check the [online demo](https://zijianhuang.github.io/DemoCoreWeb/angular).
+
 ## Through ChatGPT Codex
 
 I use the Codex extension of Visual Studio Code.
 
-1. [codex-detail.component.ts](https://github.com/zijianhuang/webapiclientgen/blob/master/HeroesDemo/src/app/codex-detail/codex-detail.component.ts)
-2. [codex-detail.component.html](https://github.com/zijianhuang/webapiclientgen/blob/master/HeroesDemo/src/app/codex-detail/codex-detail.component.html)
+1. [codex-detail.component.ts](https://github.com/zijianhuang/DemoCoreWeb/tree/master/AngularHeroes/src/app/codex-detail/codex-detail.component.ts)
+2. [codex-detail.component.html](https://github.com/zijianhuang/DemoCoreWeb/tree/master/AngularHeroes/src/app/codex-detail/codex-detail.component.html)
 
 Codex is surely smarter than generic ChatGPT, especially when it is integrated with Visual Studio Code, at least for better Developer Experience.
 
@@ -211,7 +203,7 @@ Codex is surely smarter than generic ChatGPT, especially when it is integrated w
 1. [data-detail.component.ts](./claude/data-detail.component.ts)
 2. [data-detail.component.html](./claude/data-detail.component.html)
 
-Claude.ai is as smart as Codex, however, the code generate is too verbose, and its practice of defensive programming is over diligent.
+Claude.ai is as smart as Codex, however, the code generated is too verbose, and its practice of defensive programming is over diligent.
 
 HTML by generic ChatGPT:
 ```html
@@ -261,11 +253,11 @@ HTML by generic ChatGPT:
 
 For displaying errors of multiple constraints, the code generated by ChatGPT is more compact. Also, ChatGPT recognizes that the FormGroup TypeScript codes included in the prompt provides strictly typed data with `form.controls.name` already assure form control `name` is there. There's no need to have a guesswork and safety net like `form.get('name')?`.
 
-Nevertheless, this does not mean Claude.ai is overall worse than ChatGTP. It might just happen that Claude.ai is not very good in crafting Angular code.
+Nevertheless, this does not mean Claude.ai is overall worse than ChatGTP. It might just happen that Claude.ai is not very good in crafting Angular code, or the default settings need to be adjusted through prompt.
 
 ## Common Behavior
 
-Without explicitly prompting "Use `@if` instead of `*ngIf`", they all use `*ngIf` in the HTML template.
+Without explicitly prompting "Use `@if` instead of `*ngIf`", they all use `*ngIf` in the HTML template. Apparently the training of these AI agents was mostly done before Angular 17.
 
 # How About Generate GUI Directly From Backend Code?
 
@@ -277,20 +269,15 @@ And I have tried:
 
 For Angular Reactive Forms programming of Angular 21 along with Angular Material Components, I have already the following .NET POCO classes codes about the data models:
 ```cs
-	[DataContract(Namespace = Constants.DataNamespace)]
 	public class IntegralEntity
 	{
-		[DataMember]
 		public sbyte SByte { get; set; }
 
-		[DataMember]
 		public byte Byte { get; set; }
 ...
-		[DataMember]
 		[RegularExpression(@"^(https?:\/\/)?[da-z.-]+.[a-z.]{2,6}([/\w .-]*)*\/?$")]
 		public Uri Web { get; set; }
 
-		[DataMember, EmailAddress, MaxLength(255)]
 		public string EmailAddress { get; set; }
 	}
 
@@ -309,21 +296,22 @@ and I would like you to:
 
 I have tried with ChatGPT normal, and Claud.ai. You may try with similar prompt with various AI code agents.
 
-So far I see the component generated by ChatGPT is slightly more verbose than the one based on the prompt including TypeScript generated.
+So far I see the component generated by ChatGPT is slightly more verbose than the one based on the prompt containing TypeScript code generated.
 And the one generated by Claude.ai is much more verbose and complex -- more complex design with much lengthier code.
 
 ## Conclusion
 
 After these experiments, I would prefer to use a traditional code generator to produce TypeScript code first, and then ask AI to generate the data‑entry form. My reasons are:
 
-1.  The output of a traditional code generator is predictable and the least verbose.
-2.  I am not expected to manually maintain the generated code.
-3.  I can focus on the application code that deals with business logic rather than technical details.
-4.  Even though the data‑entry form is generated by AI, it is still faster to adjust it manually than to write prompts asking the AI to refine it.
-5. The more tasks/steps in the AI context window, the more likely the AI generates more complex design and longer code, and the more likely the data entry form contains more technical details.
+1.  The output of a traditional code generator is predictable, deterministic and the least verbose.
+1.  I shouldn't be expected to manually adjust and maintain the generated code by traditional codegen.
+1.  Even though the data‑entry form is generated by AI, it is still faster to adjust it manually than to write prompts asking the AI to refine it.
+1. The more tasks/steps in the AI context window, the more likely the AI generates more complex design and longer code, and the more likely the data entry form contains more unnecessary technical details / wastes.
 
 Both traditional code generators and AI code agents are opinionated, while you may ask AI code generates to changed to the other opinionated approaches. 
 
-When building complex business applications using libraries, frameworks, code generators, and AI code agents, where is the balance, and how do we define that balance among these various opinionated approaches?
+When building complex business applications using libraries, frameworks, code generators, and AI code agents:
+* Where is the balance? 
+* How do we define that balance among various opinionated approaches?
 
 

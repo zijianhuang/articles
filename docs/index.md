@@ -8,7 +8,7 @@
 1. [Use ChatGPT 5.2 Codex to Craft Web Theme Loader](./Web%20Theme%20Loader%20by%20ChatGPT52Codex/)
 1. [WebApiClientGen vs Kiota regarding ASP.NET backend + Angular Frontend](./WebApiClientGen%20vs%20Kiota%20regarding%20Angular/)
 1. [Prompt to AI-generated binary is feasible. And is doomsday for programmers near?](./ElonMuskMachineCode)
-
+1. [Automate Your Full-stack Development on ASP.NET Core Web API and Angular With Code Generator and AI Code Agent](./Automate%20Your%20Full-stack%20development/)
 
 ## [CodeProject.com](https://www.codeproject.com/search?editorId=3627575)
 
