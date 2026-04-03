@@ -1,6 +1,6 @@
 ## GitHub
 
-1. [Yet Another Web Theme Loader](./Web%20Theme%20Loader/)
+1. [Yet Another Web Theme Loader](./Web%20Theme%20Loader%20Tips/)
 1. [Web Theme Loader Explained](./Web%20Theme%20Loader/)
 1. [Web Theme Loader Crafted by Windows Copilot](./Web%20Theme%20Loader%20by%20Windows%20Copilot/)
 1. [Web Theme Loader Crafted by M365 Copilot](./Web%20Theme%20Loader%20by%20M365%20Copilot/)
