@@ -6,6 +6,11 @@ If you google `JavaScript theme loader`, you may find many articles and example 
 
 I have crafted one from scratch based on specific functional requirements and technical requirements, conforming to my design principles for UI, UX and Developer Experience.
 
+Developer Experience expected:
+1. Rich features with small API surface.
+2. Flexibility.
+3. Portability & Reusability.
+
 ## Requirements
 
 ### User Story
@@ -14,7 +19,7 @@ As a web app user, I want to choose from multiple available themes — sometimes
 
 ### Work Order
 
-Develop a TypeScript-based API that provides helper functions or classes for building a theme picker in web applications. The API should be framework‑agnostic, while optionally offering convenient integration points for Angular applications.
+Develop a TypeScript‑based, framework‑agnostic API that exposes reusable helpers and abstractions for implementing theme pickers in web applications. The API should remain independent of any specific framework while optionally offering seamless integration points for Angular.
 
 ### Functional Requirements
 1. Support both light and dark themes.  
@@ -25,13 +30,13 @@ Develop a TypeScript-based API that provides helper functions or classes for bui
 
 ### Technical Requirements
 1. Reusable across multiple applications.  
-2. Minimal API surface to ensure easy customization and easy usage.  
+2. Minimal API surface to ensure easy configuration and customization.  
 3. Neutral with respect to specific UI design choices.  
 4. Must be efficient and avoid visual flicker during startup and theme switching.  
 5. Usable in both SPA and PWA.  
 6. Fully functional in PWAs, offline usage, and intranet environments.  
-7. Adjustable after build, bundling, and deployment. For example, an admin should be able to change the number and order of available themes, and modify app‑specific color files.  
-8. Themes may be hosted locally or on a CDN.  
+7. Configurable after build, bundling, and deployment. For example, an IT admin should be able to change the number and order of available themes, and modify app‑specific color files.  
+8. Themes may be hosted locally with the app code or on a CDN.  
 9. Selecting a theme that is already loaded should not trigger a reload of the theme.  
 10. Core theme management must be separated from the theme‑picker UI.
 
@@ -44,7 +49,7 @@ Develop a TypeScript-based API that provides helper functions or classes for bui
 
  ** If you find your requirements match mine, please read on.**
 
- The following sourcecode is crafted in TypeScript for Angular SPA, and it should be easy to use in other Web apps or sites crafted in JavaScript, with little modification.
+ The following sourcecode is crafted in TypeScript for Angular SPA, and it should be reusable in other Web apps or sites crafted in JavaScript, with near zero modification.
 
  ## Theme Loader
 
@@ -295,22 +300,24 @@ The API exposes 3 contracts:
 3. `static get selectedTheme(): string | null` of themeLoader to give the URL of the selected theme, so GUI may display which theme is in-use.
 4. JavaScript constant SITE_CONFIG that contains a theme dictionary and app specific theme settings.
 
-### Installation and Integration
+### Installation
 1. Add [themeLoader.ts](https://github.com/zijianhuang/nmce/blob/master/projects/demoapp/src/app/themeLoader.ts)
 2. Add data schema [`themeDef.ts`](https://github.com/zijianhuang/nmce/blob/master/projects/demoapp/src/environments/themeDef.ts) for the themes dictionary in `siteconfig.js`, along with [`environment.common.ts`](https://github.com/zijianhuang/nmce/blob/master/projects/demoapp/src/environments/environment.common.ts) for strongly typed site config during Web app startup.
-3. Call `ThemeLoader.loadTheme()` before the [bootstrap of the Web app](https://github.com/zijianhuang/nmce/blob/master/projects/demoapp/src/main.ts).
-4. In the [UI component presenting the theme picker](https://github.com/zijianhuang/nmce/blob/master/projects/demoapp/src/app/app.component.ts), convert the themes dictionary to an array which will be used to present the list. And call `ThemeLoader.loadTheme()` when the picker picks a theme.
-5. Prepare [`siteconfig.js`](https://github.com/zijianhuang/nmce/blob/master/projects/demoapp/src/conf/siteconfig.js).
-6. In [index.html](https://github.com/zijianhuang/nmce/blob/master/projects/demoapp/src/index.html), add `<script src="conf/siteconfig.js"></script>` .
 
-Remarks:
-* Interfaces defined in `themeDef.ts` and `environment.common.ts` won't be built into JavaScript, therefore they are not part of the API
+### Integration
+1. Call `ThemeLoader.loadTheme()` before the [bootstrap of the Web app](https://github.com/zijianhuang/nmce/blob/master/projects/demoapp/src/main.ts).
+1. In the [UI component presenting the theme picker](https://github.com/zijianhuang/nmce/blob/master/projects/demoapp/src/app/app.component.ts), convert the themes dictionary to an array which will be used to present the list. And call `ThemeLoader.loadTheme()` when the picker picks a theme.
+1. Prepare [`siteconfig.js`](https://github.com/zijianhuang/nmce/blob/master/projects/demoapp/src/conf/siteconfig.js).
+1. In [index.html](https://github.com/zijianhuang/nmce/blob/master/projects/demoapp/src/index.html), add `<script src="conf/siteconfig.js"></script>` .
+
 
 ### Web Sites and Apps that Use This ThemeLoader
 
 * [Angular Material Components Extension](https://zijianhuang.github.io/nmce/en/)
 * [JsonToTable](https://zijianhuang.github.io/json2table/)
 * [Personal Blog](https://zijianhuang.github.io/poets)
+* [Angular Heroes](https://zijianhuang.github.io/DemoCoreWeb/angular/dashboard), and [Sourcecode](https://github.com/zijianhuang/DemoCoreWeb/tree/master/AngularHeroes)
+* [React Heroes](https://zijianhuang.github.io/DemoCoreWeb/react/) and [Sourcecode](https://github.com/zijianhuang/DemoCoreWeb/tree/master/ReactHeroes)
 
 ## Alternative Implementation by Angular Material Documentation
 
@@ -322,7 +329,7 @@ The design basically conforms to the "Requirements" above, though more complex a
 
 And likely, the design and the implementation have inspired many LLMs based AI code generators.
 
-## Alternative Designs by AI Code Generators
+## Alternative Designs by AI Code Agents
 
 Using the requirements above as prompt, I asked Windows Copilot to generate sourcecode, then  asked M365 Copilot of another account, and the Claude.AI etc.
 
@@ -333,7 +340,7 @@ Using the requirements above as prompt, I asked Windows Copilot to generate sour
 
 # My Take on AI Code Generators
 
-For almost a year, since early 2025, I have been using Windows Copilot and M365 Copilot to help my daily programming works, mostly trivial works, and occasionally heavy scaffolding, covering these areas:
+For almost a year, since early 2025, I have been using Windows Copilot and M365 Copilot to help my daily software development works, mostly trivial works, and occasionally heavy scaffolding, covering these areas:
 1. Simple data transformation, such as JSON data to CSV.
 2. Common algorithms.
 3. Common code snippets.
@@ -342,6 +349,6 @@ For almost a year, since early 2025, I have been using Windows Copilot and M365 
 6. Scaffold codes for synchronizing data sets, for example, sync the customers of ErpNext to contacts of QuickBook. 
 7. ...
 
-I feel pleased, relax and productive with such junior programmer helping me, releasing me from trivial and repetitive technical details.
+I feel pleased, relax and productive with such junior programmers helping me, releasing me from trivial and repetitive technical details.
 
 The attempts above asking AI to generate a theme loader is to have more hand-on experience in using AI in other areas. I will be writing a series of articles about how AI could help senior developers, the inherent shortfalls of AI code generators and why such short falls exist.

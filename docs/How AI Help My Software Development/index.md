@@ -1,15 +1,19 @@
-How AI Help My Software Development
+# How AI Help My Software Development
 
 
 ## Background
 
-In Linkedin Group "Agile and Lean Software Development", Allen Holub asked: Many of us use LLMs as part of our development process. I'm interested in hearing how other people do that. Could you discuss your process in the comments?
+In Linkedin Group "Agile and Lean Software Development", Allen Holub asked: 
+<blockquote>
+Many of us use LLMs as part of our development process. I'm interested in hearing how other people do that. Could you discuss your process in the comments?
+</blockquote>
 
 My response:
-I have been using intensively Windows Copilot in developments:
+<blockquote>
+I have been using intensively Windows/M365 Copilot, ChatGPT / Codex and Claude.ai in developments:
 1. Entry level understanding of old new tech before further research and study. Old means the tech has been around for years, new means I am new to it.
 2. Simple ad-hoc data transformation.
-3. AI to craft simple help functions and modules of common topics. 
+3. AI to craft simple helper functions and modules of common topics. 
 4. AI to craft a simple service broker, for example a broker handling the auth of Quickbooks for unattended data sync service.
 5. Some tech details I have come across but I could barely remember, while I understand the concepts.
 
@@ -27,8 +31,9 @@ I do understand why LLMs AI has such performance in "writing" codes:
 
 Overall, Copilot is fairly helpful, while as a programmer you need to be very mindful about its inherent limitation of LLM.
 One of the key factors is how much maintenance efforts you are going to pay.
+</blockquote>
 
-### My Technical Background
+### Being a Lazy Programmer
 
 Over years, I have written a few non-trivial code generators, and the recent ones include:
 * [Strongly Typed Client API Generators (webapiclientgen)](https://github.com/zijianhuang/webapiclientgen) generate strongly typed client APIs in C# .NET and in TypeScript for jQuery and Angular 2+ from ASP.NET (Core) Web API.
@@ -36,11 +41,13 @@ Over years, I have written a few non-trivial code generators, and the recent one
 
 The driven force is that I am a lazy programmer who easily get tired of writing repetitive codes, in particular, HttpClient codes in C# and AJAX calls in JavaScript.
 
-I also get tired of inheriting legacy codebase written by diligent programmers, with complex architectural design, complex software design and lengthy implementation. The architect and the programmers did not fully understand the potential of the development platform, had misunderstand of basic computing science concepts such as high cohesion and loose coupling. In one case, in a pipeline of XML transformation, there are 5 steps of XML DOM schema validations, while XML serialization could do the job clean and fast, because .NET Framework can create assembly for both reader and writer based on XML schema.
+I am weary of inheriting legacy codebases authored by diligent programmers but burdened with overly complex architectural and software designs. In many cases, the architects and developers did not fully appreciate the inherent capabilities of the underlying platform, nor did they apply fundamental computer science principles such as high cohesion and loose coupling effectively. 
 
-Therefore, I am in a better position when talking about how AI helps software development and its inherent shortfalls, even though I am an AI expert.
+In one notable example, designed by an A-list consultant firm in town, an XML transformation pipeline performed five successive XML DOM schema validations, despite the fact that XML serialization alone could have solved the problem far more cleanly and efficiently. .NET (Framework) can generate assemblies at runtime or build time for both XML readers and writers directly from XML schemas, making much of that validation logic redundant.
 
-### Model to Code
+These experiences put me in a good position to discuss how AI can assist software development, and where it falls short—grounded in long-term, hands-on exposure to real-world systems, tools, and trade-offs, rather than abstract theory alone, even though I am an AI expert.
+
+## Model to Code
 
 like Model Maker.
 
@@ -234,3 +241,9 @@ This is one of the reasons I often say, technical debt is essentially management
 Why single out senior developers? because many junior developers may enjoy resolving technical debt and creating technical debt. So they may be blind no matter what method you would use. Therefore,
 1. Minimize debt in the first place through adjusting management and culture.
 2. Ask senior developers regularly to identify emerging technical debts.
+
+
+
+Great Confident:
+1. CSS crafting; transforming between light and dark theme.
+1. Crating scripts like PowerShell scripts.
