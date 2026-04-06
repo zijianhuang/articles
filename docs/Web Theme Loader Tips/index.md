@@ -23,9 +23,16 @@ The [Web theme loader API](https://github.com/zijianhuang/nmce/blob/master/proje
 2. `static loadTheme(picked: string | null, appColorsDir?: string | null)` to be called when the app user picks one from available themes.
 3. `static get selectedTheme(): string | null` of themeLoader to give the URL of the selected theme, so GUI may display which theme is in-use.
 
-Because the theme should be loaded at startup before the Web app rendering, the respective config should be loaded synchronously ASAP. The recommended implementation is to use JavaScript constant SITE_CONFIG that contains a theme dictionary and app specific theme settings.
+Because the theme should be loaded at startup before the Web app rendering, the respective config must be loaded synchronously ASAP.
 
-The GUI of theme selection is independent of the Web theme loader API.
+The GUI of theme selection is independent of the Web theme loader API. For example, in addition to Select and Menu for multiple themes, you may use Switch for switching between light and dark. 
+
+Remarks:
+* Modern browsers like Chrome, Edge, Safari, and Firefox support a built-in concept of light/dark preference. Depending on your UX design, if you would not provide UI component for changing theme, then CSS only solution works well:
+```css
+<link rel="stylesheet" href="my-light.css" media="(prefers-color-scheme: light)">
+<link rel="stylesheet" href="my-dark.css" media="(prefers-color-scheme: dark)">
+```
 
 ## Installation
 1. Add [themeLoader.ts](https://github.com/zijianhuang/nmce/blob/master/projects/demoapp/src/app/themeLoader.ts)
@@ -34,7 +41,7 @@ The GUI of theme selection is independent of the Web theme loader API.
 ## Integration
 1. Call `ThemeLoader.loadTheme()` before the [bootstrap of the Web app](https://github.com/zijianhuang/nmce/blob/master/projects/demoapp/src/main.ts).
 1. In the [UI component presenting the theme picker](https://github.com/zijianhuang/nmce/blob/master/projects/demoapp/src/app/app.component.ts), convert the themes dictionary to an array which will be used to present the list. And call `ThemeLoader.loadTheme()` when the picker picks a theme.
-1. Prepare [`siteconfig.js`](https://github.com/zijianhuang/nmce/blob/master/projects/demoapp/src/conf/siteconfig.js) and add `<script src="conf/siteconfig.js"></script>` to [index.html](https://github.com/zijianhuang/nmce/blob/master/projects/demoapp/src/index.html) if you want flexibility after build and deployment. Or, simply provide constant SITE_CONFIG in app codes.
+1. Prepare [`siteconfig.js`](https://github.com/zijianhuang/nmce/blob/master/projects/demoapp/src/conf/siteconfig.js) and add `<script src="conf/siteconfig.js"></script>` to [index.html](https://github.com/zijianhuang/nmce/blob/master/projects/demoapp/src/index.html) if you want flexibility after build and deployment. Or, simply provide constant SITE_CONFIG in app code.
 
 ### [Angular Example](https://github.com/zijianhuang/DemoCoreWeb/blob/master/AngularHeroes/)
 
@@ -176,3 +183,30 @@ const SITE_CONFIG = {
 </head>
 ```
 
+### Respect prefers-color-scheme
+
+By default, this API will pick the first available theme in the dictionary during the first startup of the Web app, and use the last pick afterward. If you want to respect during prefers-color-scheme, you may use the following in the app's bootstrap:
+```ts
+const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+// 
+```
+
+## How About I18N and L10N?
+
+The only things need to be translated is the display name of each theme.
+
+### Solution 1: No need for I18N and Use Icon To Represent Theme Impression
+
+You may extend `interface ThemeDef`, and make it contain some meta info of generating SVG icons presenting respective theme. And the icons will be inline with the HTML template. Angular Material Components site uses this approach.
+
+Or you may just hand-draw some SVG icons and linked it in the HTML template.
+
+### Solution 2: Create Dictionary in App Code
+
+Depending the framework like Angular or the library like React, there could be a few ways to create a dictionary to lookup translations and create translations.
+
+### Solution 3: Post Build Processing
+
+If you are using `siteconfig.js`, the JS file should not be included in the hash tables of the service worker for automatic update. 
+
+In Angular, each locale has its own build, therefore, you may craft some post build script to inject the translated names into the `siteconfig.js` of each build.
