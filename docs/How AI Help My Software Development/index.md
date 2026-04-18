@@ -1,4 +1,4 @@
-# How AI Help My Software Development
+# How AI Can Help Lazy Programmers Like Me
 
 
 ## Background
@@ -39,61 +39,138 @@ Over years, I have written a few non-trivial code generators, and the recent one
 * [Strongly Typed Client API Generators (webapiclientgen)](https://github.com/zijianhuang/webapiclientgen) generate strongly typed client APIs in C# .NET and in TypeScript for jQuery and Angular 2+ from ASP.NET (Core) Web API.
 * [Strongly Typed OpenAPI Client Generators (openapiclientgen)](https://github.com/zijianhuang/openapiclientgen) generate strongly typed C# and TypeScript client codes from Open API / Swagger definitions supporting jQuery, Angular, AXIOS, Fetch API, Aurelia and Angular Strictly Typed Forms.
 
-The driven force is that I am a lazy programmer who easily get tired of writing repetitive codes, in particular, HttpClient codes in C# and AJAX calls in JavaScript.
+The driving force is that I would deliver more business value through less work. And I am a lazy programmer who easily get tired of writing repetitive code even if I get paid to do so, in particular, HttpClient code in C# and AJAX calls in JavaScript.
 
-I am weary of inheriting legacy codebases authored by diligent programmers but burdened with overly complex architectural and software designs. In many cases, the architects and developers did not fully appreciate the inherent capabilities of the underlying platform, nor did they apply fundamental computer science principles such as high cohesion and loose coupling effectively. 
+I am weary of inheriting legacy codebases authored by diligent programmers but burdened with overly complex architecture and software designs. In many cases, the architects and developers did not fully appreciate the inherent capabilities of the underlying platform, nor did they apply fundamental computer science principles such as high cohesion and loose coupling effectively. 
 
-In one notable example, designed by an A-list consultant firm in town, an XML transformation pipeline performed five successive XML DOM schema validations, despite the fact that XML serialization alone could have solved the problem far more cleanly and efficiently. .NET (Framework) can generate assemblies at runtime or build time for both XML readers and writers directly from XML schemas, making much of that validation logic redundant.
+In one notable example, designed by an A-list consultant firm in town, an XML transformation pipeline performed five rounds of XML DOM schema validation, despite the fact that XML serialization alone could have solved the problem far more cleanly and efficiently. .NET (Framework) can generate assemblies at runtime or build time for both XML readers and writers directly from XML schemas, making much of that validation logic redundant. And the performance of that part of data transformation had become as least 20X faster with must less process power and memory consumption. This was not only example I had seen: using cutting edge technologies the dirty way, though not entirely wrong, since the legacy, fresh and dirty codes were "working".
 
-These experiences put me in a good position to discuss how AI can assist software development, and where it falls short—grounded in long-term, hands-on exposure to real-world systems, tools, and trade-offs, rather than abstract theory alone, even though I am an AI expert.
+These experiences put me in a good position to discuss how AI can assist software development, and where it falls short—grounded in mid-term and long-term, and explore real-world systems, tools, and trade-offs, rather than abstract theory alone, even though I am not an AI expert.
 
-## Model to Code
+These days, most programmers in commercial worlds have still been using 3GL like C++, Java, C#, Python, Dart, Swift and JavaScript etc. Therefore, in the following chapters, I will mostly focus on examples of 3GL, and general purpose programming languages, and C# .NET. If you are a Java or C++ programmer, you may find similar examples by your own researches.
 
-like Model Maker.
+The following is summaries of various technical resources that help lazy programmers.
 
-MS Workflow foundation
+## Resources for Lazy Programmers before AI
 
-High level language , compiler, build and link.
+### Code Generators
+
+* C++ Template
+* In .NET, the runtime or the compiler could generate serialization assemblies for forward only non-cache serializers. And this is just one of many [framework-managed code generators in .NET](./DotNetCodeGenerators.md).
+* Model-driven code generators.
+* ...
+
+Hints:
+* Java has similar categories of framework‑managed code generation features, but they are fewer, more fragmented, and architecturally different from .NET’s. Many are externalized.
+
+### Built-in Framework Modules 
+
+.NET Framework and .NET Core include a lot built-in framework modules that app programmers could utilize in most business applications:
+* Middleware infrastructure
+* ASP.NET Core MVC pipeline
+* Model binding system
+* Validation system
+* Action / result / exception filters
+* Routing and endpoint dispatch
+* Formatters (JSON, XML, etc.)
+* ...
+
+Utilizing those built-in module wisely could make your app code short and simple, so easy to maintain.
+
+.NET and Java provide runtime optimization. And generally clean code can help the runtime to do better optimization.
+ 
+ **Hints:**
+ * Java has small amount of built-in framework modules, while most live outside the JDK, in standardized APIs (Jakarta EE) or third‑party frameworks (Spring, Quarkus, etc.).
+
+ **Remarks:**
+ * Python is a darling programming language in the AI landscape, however, it is lack of framework-managed code generation and built-in framework modules, and this is a deliberate design choice. And the overall design choices of Python contribute to Python becoming the dominant language in the AI landscapes, in particular, meta-programming mediated by AI.
+
+### App Generator
+
+These days, when googling "Application Generator", the top results are basically all AI app generator or builder. I remember I have seen a lot advertisements of application generators in 1980s, generating business applications for DOS or Windows. For example, input a few business constraints with a little further configuration and optional customization, the generator could then generate a Northwind like application. Here's a summary about [app generators before LLMs AI](./Application%20Generators%20Before%20LLMs%20AI.md) becoming popular.
+
+### Model to Code
+
+Rather than generating the whole app, "Model to Code" offers more flexible and generic solution for application programmers, to realize implementation from high level design with UML or alike and to maintain an “active model” where changes in the model instantly updated code, and vice versa
+
+I have come across ModelMaker, and liked it for a while. ModelMaker was a UML‑style modeling and refactoring tool built specifically for Borland Delphi’s Object Pascal. It supported:
+* Drawing UML‑style class diagrams
+* Generating Delphi code from those diagrams
+* Reverse‑engineering existing Delphi code into UML diagrams
+* Refactoring and restructuring Delphi projects
+
+ModelMaker has faded away in history, and these days you have Visual Paradigm and alike supporting Java, C++ and C# etc generated from UML diagrams.
+
+Rather than starting from UML diagrams, Windows Workflow Foundation offers a form of “Model‑to‑Code”, more exactly, a model‑driven execution system where the model is the program. For some reasons, MS has discontinued WF. Nevertheless, there are still alternatives around for such classic Model-Driven Development (MDD).
+
+### 4GL, DSL and 5GL
+
+"The term [4GL](https://en.wikipedia.org/wiki/Fourth-generation_programming_language) was first used formally by James Martin in his 1981 book **Application Development Without Programmers** to refer to non-procedural, high-level specification languages. Some researchers state that 4GLs are a subset of domain-specific languages.".
+
+>> **Application Development Without Programmers**
+
+Oh yeah, literally isn't this the main intend that nowadays companies are pushing for AI code agents?
+
+Nevertheless, I have happened to use dBase, Visual FoxPro, PowerBuilder and Omnis Studio in 80s and 90s. In my observations, 4GL may reach the bottlenecks when the business grows and changes:
+1. The business needs to deal with more functional domains and technical domains, and the 4GL environment could barely catch up, due to the business growth, business landscape changes and tech landscape changes etc.
+2. The 4GL environment is discontinued by the vendor.
+
+According to Wikipedia, [Domain-specific language](https://en.wikipedia.org/wiki/Domain-specific_language) is a computer language specialized to a specific application domain. This is in contrast to a general-purpose language (GPL), which is broadly applicable across domains. There are a wide variety of DSLs, ranging from widely used languages for common domains, such as HTML for web pages, down to languages used by only one or a few pieces of software, such as MUSH soft code.
+
+## AI Code Agents
+
+In last 2 or 3 years, there have been bombardments of academic papers, marketing materials and criticism around AI Code Agents. I am at the consumer end of AI code agent, and here's my observation:
+The output of traditional code generation is predictable and deterministic, and can be compiled and used immediately without modification, while AI generated code particularly though Python meta-programming mediated by AI is not so predictable and deterministic, and often contains language syntax errors and other logic errors.
+
+I asked M365 Copilot about my observation, and here's [the analysis returned](./CodGenAndAICodeAgent.md) about "Traditional Code Generators v.s. AI Code Agent". And you are very welcome to ask similar question to your favorite AI agents, or even better, ask real AI experts.
+
+Keep the shortfalls of AI code agents in mind, you as a programmer are in better position to get the best from those agents, and deliver more business value through less work.
+
+Probably you have heard: "Scrum: The Art of Doing Twice the Work in Half the Time". In my observations, the practices by the name of Scrum have often resulted in doing twice the waste in half the time, since most work involved in value delivery is waste, due to various of ScrumBut practices and factors. Overall it is not too bad, if the waste is inevitable. 
+
+And if not being careful, mindful and cautious enough, you using AI code agent could result in delivering 10 times of the technical debts in 1/10 of the time, since the code generated could be severely over complex and lengthy.
+
+Are you confident that AI is able to reduce the pure technical debts it created?
+
+Are you sure you don't need to care about technical debts in most real world business applications?
+
+In my observations, AI code agents are generally good at doing Plus - adding tons of code politically correct regarding SOLID and design patterns etc., just like a junior developer armed with all the academic knowledge of software engineering but without real world experience in making trade-off according to business context. And currently those AI code agents have near zero capability of doing Minus -- removing code and simplifying design.
 
 ## How AI has been helping me?
 
-In addition to working solutions, I am diligent in approaching:
-1. Clean code.
-2. Runtime performance. And generally clean code is fast.
-
-### How .NET (Framework) without AI has been helping me?
-
-1. Many layers of APIs. So I can choose the right layers of APIs for the right contexts.
-2. Build time code generation.
-3. Runtime code generation.
-4. Runtime optimization. And generally clean code can help the runtime to do better optimization.
-5. In-source document (DocComment).
+There are reasons why I have listed many traditional codegen resources predated LLMs AI code agents. Before the AI code agents become a thing, I have often said the following statements or examples:
+1. Having a working solution won't satisfy me or the business, and I aim for delivering twice the value through half the work.
+2. In software development, often for one functional requirement, there could be unlimited number of working solutions, a few good, mostly dirty. Generally the simplest one is the most suitable for the business.
+3. In software development, for one function requirement, there could be unlimited number of working design, a few good, mostly dirty. And from one design, there could be a few working implementations, one or two good, the others dirty. 
+4. The key to find the most suitable for the business is to establish sufficient 2-way communication with the business and take significant efforts for such communication.
+5. Being a lead developer in a green field project, I typically spend 1/3 or 1/4 of my billable hours for coding including testing, and the rest for thinking, studying and researching, as well as talking to the business, clients and end users. So the LoC is typically 1/2 to 1/5 of LoC written by other developers on the same technical stacks, and often I deliver simpler design with less dependencies on 3rd party components.
+6. Being a lead developer in very legacy projects left by predecessors, I typically spend much more time in cutting code rather than writing code. In one case of maintaining a legacy ERP system, after 3 and half years, I had added 500 lines of code and removed 5000 lines of code to make the system work better with much less bug reports every week, and being slightly faster. Rather than spending most efforts in debugging, I [tackled defects which are the nests of bugs](https://webandlife.blogspot.com/2012/07/green-field-projects-and-legacy.html).
 
 ### How Visual Studio with AI has been helping me?
 
 1. AI generated DocComment. 70% hit rate.
 2. AI suggestion of next paragraph of code. 40% hit rate for long codes, depending on the subjects, and 70% for short repetitive codes.
 
-Remarks:
+**Remarks:**
 * The hit rate is based on my impression, not statistics. However, it represents how much I feel comfortable with the AI correctness, overall subjective.
-* I have been mostly developing complex business applications and development tools, so my comfort zone may be different from yours.
-
-Remarks:
+* I have been mostly developing complex business applications and development tools, so my comfort zones may be different from yours.
 * I can't help thinking, the VS dev team is working on better scaffolding with AI. So in next major release of VS, I may just say a few prompts, and VS can scaffold a comprehensive skelton and even a full app. VS AI scaffolding should outperform many AI code generators out there, because VS has already got comprehensive and solid scaffolding logic built-in along many IDE accessories that assist the technical correctness.
 
-### How AI compensate my poor memory
+### How AI compensates my poor memory
 
-I have always got poor memory and could barely remember technical details except those I am using currently and repetitively, but I don't enjoy doing repetitive technical works. Look at the bright side, the IT landscapes keep changing, basically reshuffled every 2 years in early 70s. Therefore, such disadvantage make me forget legacy and obsolete technologies, while I am good at mastering concepts.
+I have always got poor memory and could barely remember technical details except those I am using actively and repetitively, but I don't enjoy doing repetitive technical works. Look at the bright side, the IT landscapes keep changing, basically reshuffled every 2 years since early 70s. Therefore, such disadvantage make me forget legacy and obsolete technologies, while I am good at understanding concepts.
 
 **Remarks:**
-* In the past, I accumulated my own personal knowledge base:
+* In the past, I accumulated my own personal knowledge-base through:
     * Directory with docs
     * Google Notes (discontinued by Google)
     * Evernote
     * Personal Wiki
 * Google search, my alcoholic friend.
 
-### Simple ad-hoc data transformation
+Likewise, AI is your alcoholic friend. You might have experienced AI had often mixup old and new technical items. And when being questioned, AI will try to fix through further research or "imagination". And you have probably come across studies about AI hallucination.
+
+### Dealing with simple ad-hoc data transformation
 
 For example:
 1. JSON to CSV, and vice versa, while existing dedicate tools could not cover. Hit rate: 95%. 
@@ -104,18 +181,25 @@ For example:
 Old means that the tech has been around for years, new means that I am new to it. Hit rate: 95%.
 
 **Remarks:**
-* In contrast, the AI response to brand new tech is weak.
+* In contrast, the AI response to brand new tech is weak for correctness.
 
 
-#### Ask the right question
 
-There are 2 types of learning: fact learning and concept learning. ....
+
+
+
+
 
 
 ## Analysis
 
-1. Can AI read between lines?
-2. The weight of technical requirements.
+Ask yourself some questions.
+
+1. Can AI read between lines? Are you confident that AI can really understand your question or prompt? Even if you have degrees in English Literature and Computing Science, are you sure you can express every pieces of business contents and contexts through prompt?
+2. Do you understand that one bit can kill through Turing machine?
+3. Are you sure that AI is not biased in subjects of politics and technologies?
+4. While the literal knowledge of AI is many many magnitudes greater than any human being on Earth, how many aspects intelligence in AI are missing comparing with human's intelligence?
+5. It has been well documented in various software engineering textbooks, the maintenance cost is 10 times .... Are you sure the involvement of AI generating the whole app could make the matter better or worse?
 
 
 Who care if the code is long or short, clear or dirty? as long as it run? as long as we have fast hardware?
@@ -133,7 +217,21 @@ some by A list consultant firm, done it, or evaluated it.
 ### AI can not fully understand your business contexts
 
 
+### Ask the right question
 
+There are 2 types of learning: fact learning and concept learning.
+
+
+According to ["Traditional Code Generators v.s. AI Code Agent"](./CodGenAndAICodeAgent.md), AI‑generated code (including Python‑mediated meta‑programming) is:
+* Probabilistic
+* Heuristic‑driven
+* Context‑sensitive
+* Statistically inferred
+* Not formally constrained
+
+As a developer or a business person, are you so sure that you would put your business interest to the hand of AI code agent and also expect human developers to quickly fix the hidden problems or technical debts generated by AI? 
+
+One bit can kill.
 
 Summary
 
@@ -192,11 +290,11 @@ The following is my personal opinions without statistics support.
 ## Senior developers
 
 Definition senior developers:
-1. Over 5 years experience in commercial programming. 
-1. At least degree in software engineering or computing science.
+1. Over 5 years experience in commercial programming with non repetitive business subjects and tech subjects. 
+1. At least one degree in software engineering or computing science.
 1. Continuous study through reading textbooks or taking courses.
 
-Without a degree, self-taught is OK, while having a degree is not to obtain knowledge, but also undergo systematic trainings for the ways of thinking and teamwork. Surely some can obtain such skills without a degree.
+Without a degree, self-taught software developer is often OK, while having a degree is not to obtain only knowledge, but also undergo systematic trainings for the ways of thinking and teamwork. Surely some can obtain such skills without a degree.
 
 ### Advantages when prompting AI
 
@@ -247,3 +345,11 @@ Why single out senior developers? because many junior developers may enjoy resol
 Great Confident:
 1. CSS crafting; transforming between light and dark theme.
 1. Crating scripts like PowerShell scripts.
+
+
+Onb bit can kill, 
+1. Are you sure AI generated code wont' generated kill bits?
+2. Are you sure AI can spot the kill bits that AI generated or you crafted?
+
+
+Fashion recycle? regarding app generators.

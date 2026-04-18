@@ -261,7 +261,7 @@ Without explicitly prompting "Use `@if` instead of `*ngIf`", they all use `*ngIf
 
 # How About Generate GUI Directly From Backend Code?
 
-Previously, I have used WebApiClientGen generated TypeScript code as part of the prompt for AI code agents to create the data‑entry component. You may be asking: why not just use the backend POCO classes as part of the prompt?
+Previously, I have used [WebApiClientGen](https://github.com/zijianhuang/webapiclientgen) generated TypeScript code as part of the prompt for AI code agents to create the data‑entry component. You may be asking: why not just use the backend POCO classes as part of the prompt?
 
 And I have tried:
 
@@ -292,7 +292,7 @@ and I would like you to:
 5. MatError for showing validation errors
 6. Use `@if` instead of `*ngIf`.
 
-## AI Generated Codes
+## AI Generated Code
 
 I have tried with ChatGPT normal, and Claud.ai. You may try with similar prompt with various AI code agents.
 

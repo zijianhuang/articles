@@ -94,4 +94,4 @@ dotnet add package WebApiClientGenCore.NG2FormGroup
 - `WebApiClientGenCore` → generates C# client APIs and host plugins.  
 - `WebApiClientGenCore.NG2FormGroup` → generates TypeScript codes support native HttpClient and FormGroup with validations.
 
-For more details, please check "[Generate Typed FormGroup of Angular Reactive Forms with ASP.NET Core Web API](https://www.codeproject.com/articles/Generate-Typed-FormGroup-of-Angular-Reactive-Forms)"
+For more details, please check "[Generate Typed FormGroup of Angular Reactive Forms with ASP.NET Core Web API](https://zijianhuang.github.io/codeproject/Generate%20Typed%20FormGroup%20of%20Angular%20Reactive%20Forms%20with%20ASP.NET%20Core%20Web%20API%20-%20CodeProject.html)"
