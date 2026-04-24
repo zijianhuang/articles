@@ -1,5 +1,6 @@
-# How AI Can Help Lazy Programmers Like Me
+# How Can AI Help Lazy Programmers?
 
+How can AI help lazy programmers like me?
 
 ## Background
 
@@ -41,7 +42,7 @@ Over years, I have written a few non-trivial code generators, and the recent one
 
 The driving force is that I would deliver more business value through less work. And I am a lazy programmer who easily get tired of writing repetitive code even if I get paid to do so, in particular, HttpClient code in C# and AJAX calls in JavaScript.
 
-I am weary of inheriting legacy codebases authored by diligent programmers but burdened with overly complex architecture and software designs. In many cases, the architects and developers did not fully appreciate the inherent capabilities of the underlying platform, nor did they apply fundamental computer science principles such as high cohesion and loose coupling effectively. 
+I am weary of inheriting legacy codebases authored by diligent programmers but burdened with overly complex architecture and software designs. In many cases, the architects and developers did not fully appreciate the inherent capabilities of the underlying development platform, nor did they apply fundamental computer science principles such as high cohesion and loose coupling effectively.
 
 In one notable example, designed by an A-list consultant firm in town, an XML transformation pipeline performed five rounds of XML DOM schema validation, despite the fact that XML serialization alone could have solved the problem far more cleanly and efficiently. .NET (Framework) can generate assemblies at runtime or build time for both XML readers and writers directly from XML schemas, making much of that validation logic redundant. And the performance of that part of data transformation had become as least 20X faster with must less process power and memory consumption. This was not only example I had seen: using cutting edge technologies the dirty way, though not entirely wrong, since the legacy, fresh and dirty codes were "working".
 
@@ -145,8 +146,9 @@ There are reasons why I have listed many traditional codegen resources predated 
 4. The key to find the most suitable for the business is to establish sufficient 2-way communication with the business and take significant efforts for such communication.
 5. Being a lead developer in a green field project, I typically spend 1/3 or 1/4 of my billable hours for coding including testing, and the rest for thinking, studying and researching, as well as talking to the business, clients and end users. So the LoC is typically 1/2 to 1/5 of LoC written by other developers on the same technical stacks, and often I deliver simpler design with less dependencies on 3rd party components.
 6. Being a lead developer in very legacy projects left by predecessors, I typically spend much more time in cutting code rather than writing code. In one case of maintaining a legacy ERP system, after 3 and half years, I had added 500 lines of code and removed 5000 lines of code to make the system work better with much less bug reports every week, and being slightly faster. Rather than spending most efforts in debugging, I [tackled defects which are the nests of bugs](https://webandlife.blogspot.com/2012/07/green-field-projects-and-legacy.html).
+7. Technical debt is essentially management debt. Typical symptom is that both the tech people and the business people are lack of commitments for iterative 2-way communication, and the end result is often over complex architecture, over complex software design, and over lengthy code.
 
-### How Visual Studio with AI has been helping me?
+### How Visual Studio and alike with AI has been helping me?
 
 1. AI generated DocComment. 70% hit rate.
 2. AI suggestion of next paragraph of code. 40% hit rate for long codes, depending on the subjects, and 70% for short repetitive codes.
@@ -156,11 +158,17 @@ There are reasons why I have listed many traditional codegen resources predated 
 * I have been mostly developing complex business applications and development tools, so my comfort zones may be different from yours.
 * I can't help thinking, the VS dev team is working on better scaffolding with AI. So in next major release of VS, I may just say a few prompts, and VS can scaffold a comprehensive skelton and even a full app. VS AI scaffolding should outperform many AI code generators out there, because VS has already got comprehensive and solid scaffolding logic built-in along many IDE accessories that assist the technical correctness.
 
+**Hints:**
+* Visual Studio Code with plug-ins connecting to GitHub Copilot offer similar assistants.
+* Visual Studio Code with plug-in connecting to ChatGPT Codex help too.
+* Traditional IDE assistants like syntax check and intellisense of function prototypes and DocComment are still the most deterministic helpful.
+
 ### How AI compensates my poor memory
 
-I have always got poor memory and could barely remember technical details except those I am using actively and repetitively, but I don't enjoy doing repetitive technical works. Look at the bright side, the IT landscapes keep changing, basically reshuffled every 2 years since early 70s. Therefore, such disadvantage make me forget legacy and obsolete technologies, while I am good at understanding concepts.
+I have always got poor memory and could barely remember technical details except those I am using actively and repetitively, but I don't enjoy doing repetitive technical works. Look at the bright side, the IT landscapes keep changing, basically reshuffled every 2 years since early 70s. Therefore, such disadvantage make me forget legacy and obsolete technologies, while I am good at understanding and remembering concepts.
 
 **Remarks:**
+* Such poor capability memorizing technical details had made me look bad in job interview during the technical screening when the interview panels asked me questions that a junior developer and newly graduate of CS or SE could outperform me.
 * In the past, I accumulated my own personal knowledge-base through:
     * Directory with docs
     * Google Notes (discontinued by Google)
@@ -168,13 +176,18 @@ I have always got poor memory and could barely remember technical details except
     * Personal Wiki
 * Google search, my alcoholic friend.
 
-Likewise, AI is your alcoholic friend. You might have experienced AI had often mixup old and new technical items. And when being questioned, AI will try to fix through further research or "imagination". And you have probably come across studies about AI hallucination.
+Likewise, AI is your alcoholic friend. You might have experienced that AI had often mixup old and new technical items. And when being questioned, AI will try to fix through further research or "imagination". And you have probably come across studies about AI hallucination.
+
+However, you can claim AI may have hallucination, provided you have provided the right prompt. "Garbage in, garbage out" (GIGO) is applied to AI prompt, though occasionally AI could remind you the incorrectness of the prompt. However, you still need foundation knowledge to understand the refinement attempt by the AI upon the incorrect prompt.
 
 ### Dealing with simple ad-hoc data transformation
 
 For example:
 1. JSON to CSV, and vice versa, while existing dedicate tools could not cover. Hit rate: 95%. 
 2. Given JSON data, generate POCO classes with JsonPropertyNameAttribute. Hit rate: 90%. Weak at data type for DateTime, DateOnly and TimeOnly etc. Good at currency.
+3. Web content scraping. After CodeProject.com, I manage the save local copies from what cached in https://web.archive.org/. To create an index page, I asked ChatGPT Codes plugged in VS Code to retrieved title from certain xpath and format. And here you are: https://zijianhuang.github.io/codeproject/
+4. Migrate the automatic tests of TypeScript projects from Karma or Jest to Vitest.
+5. ...
 
 ### Entry level understanding of old new tech before further research and study. 
 
@@ -183,44 +196,77 @@ Old means that the tech has been around for years, new means that I am new to it
 **Remarks:**
 * In contrast, the AI response to brand new tech is weak for correctness.
 
+### Common algorithms 
 
+Most algorithms you learn from university courses like “Data Structures and Algorithms” have been well packaged into many development platforms—such as the .NET BCL and similar frameworks, as well as third‑party components and dedicated libraries like MATLAB. 
 
+For those that are not included, AI is almost 100% correct nowadays. A typical technical screening question is, for example, a three‑elevator control system.
 
+I basically failed every technical screening involving such algorithms during job interviews, even though I taught “Data Structures and Algorithms” at university as a lecturer in my early 20s. So what was the point of doing this kind of screening when recruiting a senior developer in the past? And what is the point in an era when LLM‑based AI can outperform any developer in the world?
 
+Nevertheless, it is still important for developers to have systematically studied data structures and algorithms to sharpen the human brain, so they can use AI tools more effectively and achieve better outcomes.
 
+# Analysis
 
-
-
-## Analysis
-
-Ask yourself some questions.
-
+Ask yourself some questions:
 1. Can AI read between lines? Are you confident that AI can really understand your question or prompt? Even if you have degrees in English Literature and Computing Science, are you sure you can express every pieces of business contents and contexts through prompt?
 2. Do you understand that one bit can kill through Turing machine?
 3. Are you sure that AI is not biased in subjects of politics and technologies?
 4. While the literal knowledge of AI is many many magnitudes greater than any human being on Earth, how many aspects intelligence in AI are missing comparing with human's intelligence?
-5. It has been well documented in various software engineering textbooks, the maintenance cost is 10 times .... Are you sure the involvement of AI generating the whole app could make the matter better or worse?
+5. Who and why care if the code is long or short, clean or dirty? as long as it run? as long as we have fast hardware?
 
+## Flashback about software engineering before LLMs AI
 
-Who care if the code is long or short, clear or dirty? as long as it run? as long as we have fast hardware?
+Based on Robert Glass’s “Facts and Fallacies of Software Engineering”, the industry is plagued by repeating old mistakes, prioritizing coding over design, and mismanagement. Key facts highlight that quality is expensive but saves money, smaller teams are more productive, and maintenance drives costs. 
 
-### Most working codes out there are mediocre: verbose and over complex
+### Key Facts (The Truth)
+* Maintenance: The majority of software costs occur after delivery (maintenance phase). 
+* Quality: Quality does not cost more; it actually saves money by reducing rework.
+* Teams: Smaller, experienced teams are far more productive than larger, junior ones.
+* Development: Errors are most commonly found in the requirements phase, not during coding.
+* Management: You can't manage what you can't measure, but you often can't measure what matters.
 
-I have some online showcases, open sourced, which 1/5
-legacy commercial. done it.
-some by A list consultant firm, done it, or evaluated it.
+### Key Fallacies (Common Mistakes)
+* "We need better tools": Tools are often purchased but rarely used effectively.
+* "Coding is the main task": It's actually a small part of the overall * engineering lifecycle.
+* "Documentation is unnecessary": Skipping documentation leads to high maintenance costs.
+* "Adding more programmers to a late project makes it faster": This actually makes it later.
+* "Estimation happens once": Software estimation must be continuous, not just at the start.
 
-* I am not sure when training the AI, how the labelling process works?
+Ask yourself, how can LLMs AI alter the key facts? or help us to avoid those key fallacies?
 
-* My example, with Google AI Studio
+## Common Pitfalls of Code Generated by LLM AI Code Agents
 
-### AI can not fully understand your business contexts
+As a programmer, I have benefited greatly from AI code agents, partly because I am poor at remembering trivial technical details. So far, I have found that once I ask AI code agents to implement a non-trivial feature, no matter how detailed, formal, or simple the prompt, the generated source code is usually over-bloated in design and implementation, and the line count is typically 3–5 times what it should be.
 
+### AI-Generated Source Code vs Hand-Crafted Code
 
-### Ask the right question
+“3–5 times” sounds like a magic number to me. In several commercial rewrite projects and one rewrite of an open-source tool—using the same technical stack and language:
 
-There are 2 types of learning: fact learning and concept learning.
+1. My codebase was around 1/3 to 1/5 the LoC of the legacy versions, which were only a few months or a year older.
+1. My designs were much simpler, with fewer dependencies on third-party components and less fancy DI/IoC, SOLID, and design patterns.
+1. Runtime performance was 20% to 50% faster.
+1. The end products were more reliable and robust.
 
+Regarding the legacy codebases:
+
+1. The author of one tool was enthusiastic about SOLID and DI/IoC but apparently misunderstood high cohesion and loose coupling, using DI/IoC in the wrong places.
+1. The authors of the legacy commercial programs knew SOLID and design patterns well, but still applied them in the wrong places—likely due to misunderstanding cohesion and coupling and introducing overly advanced designs too early.
+
+Basically, these legacy codebases looked “politically correct” with respect to SOLID, but were simply over-complicated and too lengthy, resulting slowness and too much consumption of computing resources.
+
+Let’s review what Robert C. Martin said in "UML for Java Programmers". After introducing SOLID, he states: 
+<blockquote>
+When should these principles be applied? At the first hint of pain. It is not wise to make all systems conform to all principles all the time. You will spend an eternity imagining possible environments for OCP or sources of change for SRP, create dozens of little interfaces for ISP, and invent many worthless abstractions for DIP.
+
+The best way to apply these principles is reactively rather than proactively. When you detect a structural problem or notice a module being affected by changes elsewhere, then consider whether one or more of these principles can help.
+
+A reactive approach also requires a proactive effort to create pressure early. If you want to react to pain, you must diligently search for sore spots.
+</blockquote>
+
+AI code agents typically always apply SOLID principles proactively, just like many human developers would do, resulting in over complex and over lengthy code.
+
+### The characteristic of AI generated code
 
 According to ["Traditional Code Generators v.s. AI Code Agent"](./CodGenAndAICodeAgent.md), AI‑generated code (including Python‑mediated meta‑programming) is:
 * Probabilistic
@@ -231,9 +277,29 @@ According to ["Traditional Code Generators v.s. AI Code Agent"](./CodGenAndAICod
 
 As a developer or a business person, are you so sure that you would put your business interest to the hand of AI code agent and also expect human developers to quickly fix the hidden problems or technical debts generated by AI? 
 
-One bit can kill.
+### One bit can kill through Turing machine
 
-Summary
+I have asked AI agents to collect and summarize 12 prominent historical examples, some of which have been mentioned in various software engineering textbooks:
+1. [Written by M365 Copilot](./One%20Byte%20Can%20Kill_M365.md).
+2. Written by Claude AI, in [Markdown](./one_bit_can_kill_claude.md) and [Docx](./one_bit_can_kill_claude.docx).
+3. Written by Google AI Studio, in [Markdown](./Software%20development%20is%20a%20precise%20scienc.md)
+
+
+
+
+
+
+
+
+
+
+
+
+# Summary
+
+
+Despite that I have benefited from LLMs AI code agents, I am still interested in seeing which agents could meet the following challenges:
+1. .. without calling existing traditional code generators.
 
 
 Mocking how AI tries to sound correct. delusion. 

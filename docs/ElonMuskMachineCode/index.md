@@ -53,9 +53,9 @@ I presume you have a basic idea of how AI code agent vendors train their models.
 1. Do they simply scan all code on GitHub and SourceForge, as well as some commercial programs and libraries?
 1. Do they label code with signals about code quality?
 
-As a programmer, I have benefited greatly from AI code agents, partly because I am poor at remembering trivial technical details. So far, I have found that once I ask AI code agents to implement a non-trivial feature—no matter how detailed, formal, or simple the prompt—the generated source code is usually over-bloated in design and implementation, and the line count is typically 3–5 times what it should be.
+As a programmer, I have benefited greatly from AI code agents, partly because I am poor at remembering trivial technical details. So far, I have found that once I ask AI code agents to implement a non-trivial feature, no matter how detailed, formal, or simple the prompt, the generated source code is usually over-bloated in design and implementation, and the line count is typically 3–5 times what it should be.
 
-### AI-Generated Source Code and Mediocre but “Politically Correct” Hand-Crafted Code
+### AI-Generated Source Code vs Hand-Crafted Code
 
 “3–5 times” sounds like a magic number to me. In several commercial rewrite projects and one rewrite of an open-source tool—using the same technical stack and language:
 
@@ -69,7 +69,7 @@ Regarding the legacy codebases:
 1. The author of one tool was enthusiastic about SOLID and DI/IoC but apparently misunderstood high cohesion and loose coupling, using DI/IoC in the wrong places.
 1. The authors of the legacy commercial programs knew SOLID and design patterns well, but still applied them in the wrong places—likely due to misunderstanding cohesion and coupling and introducing overly advanced designs too early.
 
-Basically, these legacy codebases looked “politically correct” with respect to SOLID, but were simply over-complicated and too lengthy.
+Basically, these legacy codebases looked “politically correct” with respect to SOLID, but were simply over-complicated and too lengthy, resulting slowness and too much consumption of computing resources.
 
 ### How I Have Been Writing Clean and Short Code
 
