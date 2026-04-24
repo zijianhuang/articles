@@ -57,7 +57,7 @@ The following is summaries of various technical resources that help lazy program
 ### Code Generators
 
 * C++ Template
-* In .NET, the runtime or the compiler could generate serialization assemblies for forward only non-cache serializers. And this is just one of many [framework-managed code generators in .NET](./DotNetCodeGenerators.md).
+* In .NET, the runtime or the compiler could generate serialization assemblies for forward only non-cache serializers. And this is just one of many [framework-managed code generators in .NET](./DotNetCodeGenerators).
 * Model-driven code generators.
 * ...
 
@@ -88,7 +88,7 @@ Utilizing those built-in module wisely could make your app code short and simple
 
 ### App Generator
 
-These days, when googling "Application Generator", the top results are basically all AI app generator or builder. I remember I have seen a lot advertisements of application generators in 1980s, generating business applications for DOS or Windows. For example, input a few business constraints with a little further configuration and optional customization, the generator could then generate a Northwind like application. Here's a summary about [app generators before LLMs AI](./Application%20Generators%20Before%20LLMs%20AI.md) becoming popular.
+These days, when googling "Application Generator", the top results are basically all AI app generator or builder. I remember I have seen a lot advertisements of application generators in 1980s, generating business applications for DOS or Windows. For example, input a few business constraints with a little further configuration and optional customization, the generator could then generate a Northwind like application. Here's a summary about [app generators before LLMs AI](./Application%20Generators%20Before%20LLMs%20AI) becoming popular.
 
 ### Model to Code
 
@@ -123,7 +123,7 @@ According to Wikipedia, [Domain-specific language](https://en.wikipedia.org/wiki
 In last 2 or 3 years, there have been bombardments of academic papers, marketing materials and criticism around AI Code Agents. I am at the consumer end of AI code agent, and here's my observation:
 The output of traditional code generation is predictable and deterministic, and can be compiled and used immediately without modification, while AI generated code particularly though Python meta-programming mediated by AI is not so predictable and deterministic, and often contains language syntax errors and other logic errors.
 
-I asked M365 Copilot about my observation, and here's [the analysis returned](./CodGenAndAICodeAgent.md) about "Traditional Code Generators v.s. AI Code Agent". And you are very welcome to ask similar question to your favorite AI agents, or even better, ask real AI experts.
+I asked M365 Copilot about my observation, and here's [the analysis returned](./CodGenAndAICodeAgent) about "Traditional Code Generators v.s. AI Code Agent". And you are very welcome to ask similar question to your favorite AI agents, or even better, ask real AI experts.
 
 Keep the shortfalls of AI code agents in mind, you as a programmer are in better position to get the best from those agents, and deliver more business value through less work.
 
@@ -251,7 +251,7 @@ As a programmer, I have benefited greatly from AI code agents, partly because I 
 Regarding the legacy codebases:
 
 1. The author of one tool was enthusiastic about SOLID and DI/IoC but apparently misunderstood high cohesion and loose coupling, using DI/IoC in the wrong places.
-1. The authors of the legacy commercial programs knew SOLID and design patterns well, but still applied them in the wrong places—likely due to misunderstanding cohesion and coupling and introducing overly advanced designs too early.
+1. The authors of the legacy commercial programs knew SOLID and design patterns well, but still applied them in the wrong places—likely due to misunderstanding cohesion and coupling and introducing overly advanced designs too early and too proactively.
 
 Basically, these legacy codebases looked “politically correct” with respect to SOLID, but were simply over-complicated and too lengthy, resulting slowness and too much consumption of computing resources.
 
@@ -268,7 +268,7 @@ AI code agents typically always apply SOLID principles proactively, just like ma
 
 ### The characteristic of AI generated code
 
-According to ["Traditional Code Generators v.s. AI Code Agent"](./CodGenAndAICodeAgent.md), AI‑generated code (including Python‑mediated meta‑programming) is:
+According to ["Traditional Code Generators v.s. AI Code Agent"](./CodGenAndAICodeAgent), AI‑generated code (including Python‑mediated meta‑programming) is:
 * Probabilistic
 * Heuristic‑driven
 * Context‑sensitive
@@ -280,9 +280,9 @@ As a developer or a business person, are you so sure that you would put your bus
 ### One bit can kill through Turing machine
 
 I have asked AI agents to collect and summarize 12 prominent historical examples, some of which have been mentioned in various software engineering textbooks:
-1. [Written by M365 Copilot](./One%20Byte%20Can%20Kill_M365.md).
-2. Written by Claude AI, in [Markdown](./one_bit_can_kill_claude.md) and [Docx](./one_bit_can_kill_claude.docx).
-3. Written by Google AI Studio, in [Markdown](./Software%20development%20is%20a%20precise%20scienc.md)
+1. [Written by M365 Copilot](./One%20Byte%20Can%20Kill_M365).
+2. Written by Claude AI, in [Markdown](./one_bit_can_kill_claude) and [Docx](./one_bit_can_kill_claude.docx).
+3. Written by Google AI Studio, in [Markdown](./Software%20development%20is%20a%20precise%20scienc)
 
 
 
