@@ -29,6 +29,7 @@ The GUI of theme selection is independent of the Web theme loader API. For examp
 
 Remarks:
 * Modern browsers like Chrome, Edge, Safari, and Firefox support a built-in concept of light/dark preference. Depending on your UX design, if you would want your Website or Webapp to adapt such preference automatically and do not expect users to change theme, then CSS only solution works well without using JavaScript code:
+
 ```css
 <link rel="stylesheet" href="my-light.css" media="(prefers-color-scheme: light)">
 <link rel="stylesheet" href="my-dark.css" media="(prefers-color-scheme: dark)">
@@ -36,6 +37,7 @@ Remarks:
 
 ## Installation
 1. Install [theme-loader-api](https://www.npmjs.com/package/theme-loader-api):
+
 ```
 npm install theme-loader-api
 ```
@@ -48,12 +50,14 @@ npm install theme-loader-api
 ### [Angular Example](https://github.com/zijianhuang/DemoCoreWeb/blob/master/AngularHeroes/)
 
  [main.ts](https://github.com/zijianhuang/DemoCoreWeb/blob/master/AngularHeroes/src/main.ts)
+
  ```ts
 ThemeLoader.init();
 bootstrapApplication(AppComponent, appConfig); 
 ```
 
 [theme-select.component.ts](https://github.com/zijianhuang/DemoCoreWeb/blob/master/AngularHeroes/src/app/theme-select.component.ts)
+
 ```ts
 	constructor() {
 		this.themes = ThemeConfigConstants.themesDic ? Object.keys(ThemeConfigConstants.themesDic).map(k => {
@@ -73,6 +77,7 @@ bootstrapApplication(AppComponent, appConfig);
 ```
 
 [theme-select.component.html](https://github.com/zijianhuang/DemoCoreWeb/blob/master/AngularHeroes/src/app/theme-select.component.html)
+
 ```html
 <mat-select #themeSelect (selectionChange)="themeSelectionChang($event)" [value]="currentTheme">
 	@for (item of themes; track $index) {
@@ -82,6 +87,7 @@ bootstrapApplication(AppComponent, appConfig);
 ```
 
 [siteconfig.js](https://github.com/zijianhuang/DemoCoreWeb/blob/master/docs/angular/conf/siteconfig.js)
+
 ```js
 const THEME_CONFIG = {
 	themesDic: {
@@ -102,6 +108,7 @@ const THEME_CONFIG = {
 ```
 
 [index.html](https://github.com/zijianhuang/DemoCoreWeb/blob/master/AngularHeroes/src/index.html)
+
 ```html
     <script src="conf/siteconfig.js"></script>
 </head>
@@ -110,6 +117,7 @@ const THEME_CONFIG = {
 ### React Example
 
 [main.tsx](https://github.com/zijianhuang/DemoCoreWeb/blob/master/ReactHeroes/src/main.tsx)
+
 ```ts
 ThemeLoader.init();
 
@@ -120,6 +128,7 @@ root.render(...
 ```
 
 [Home.tsx](https://github.com/zijianhuang/DemoCoreWeb/blob/master/ReactHeroes/src/Home.tsx)
+
 ```ts
 	const themes = ThemeConfigConstants.themesDic ? Object.keys(ThemeConfigConstants.themesDic).map(k => {
 		const c = ThemeConfigConstants.themesDic![k];
@@ -158,6 +167,7 @@ root.render(...
 ```
 
 [siteconfig.js](https://github.com/zijianhuang/DemoCoreWeb/blob/master/docs/react/conf/siteconfig.js)
+
 ```js
 const THEME_CONFIG = {
 	themesDic: {
@@ -177,6 +187,7 @@ const THEME_CONFIG = {
 ```
 
 [index.html](https://github.com/zijianhuang/DemoCoreWeb/blob/master/ReactHeroes/index.html)
+
 ```html
     <script src="conf/siteconfig.js"></script>
 </head>
